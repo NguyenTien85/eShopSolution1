@@ -15,5 +15,8 @@ namespace eShopSolution.Data.Entities
         public int? ParentId { get; set; }
         public Status Status { get; set; }
 
+        //define the relation many to many between product and Category
+        public IList<ProductInCategory> ProductInCategories { get; set; }
+        public IList<CategoryTranslation> CategoryTranslations { get; set; }
     }
 }
