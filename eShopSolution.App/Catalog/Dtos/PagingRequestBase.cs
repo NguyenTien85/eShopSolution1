@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace eShopSolution.App.Catalog.Dtos
 {
-    public class PagedViewModel<T>
+    public class PagingRequestBase
     {
-        public int TotalRecord { get; set; }
-
-        public List<T> Items { get; set; }
+        public int PageIndex { get; set; }
+        public int PageSize { get; set; }
     }
 }
