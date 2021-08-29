@@ -1,4 +1,5 @@
 using eShopSolution.App.Catalog.Products;
+using eShopSolution.App.Common;
 using eShopSolution.Data.EF;
 using eShopSolution.Utilities.Constants;
 using Microsoft.AspNetCore.Builder;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,9 +34,22 @@ namespace eShopSolution.BackendApi
             );
             //khai bao DI services
             services.AddTransient<IPublicProductService, PublicProductService>();
+            services.AddTransient<IStorageService, FileStorageService>();            
+            services.AddTransient<IManageProductService, ManageProductService>();
+
 
             //
             services.AddControllersWithViews();
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c=> 
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "swagger eShopSolution",
+                    Version = "v1"
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +71,13 @@ namespace eShopSolution.BackendApi
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "swagger eShopSolution v1");
+            });
 
             app.UseEndpoints(endpoints =>
             {

@@ -13,7 +13,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShopSolution.Utilities", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShopSolution.ViewModels", "eShopSolution.ViewModels\eShopSolution.ViewModels.csproj", "{94288C66-C0F9-41B2-8261-BCCA13828A1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShopSolution.BackendApi", "eShopSolution.BackendApi\eShopSolution.BackendApi.csproj", "{B92AD4C9-5437-435B-9BC2-542038EF8273}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShopSolution.BackendApi", "eShopSolution.BackendApi\eShopSolution.BackendApi.csproj", "{B92AD4C9-5437-435B-9BC2-542038EF8273}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Infrastructure", "1.Infrastructure", "{E10415BA-DC90-4C8A-A37C-E4B8623C0CB1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Domain", "2.Domain", "{74DF52C4-F6A5-45B5-B08A-BF24338E6605}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Hosts", "3.Hosts", "{CD0A00A9-D454-48AC-B15D-8F8A7DDA64CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.Solution Items", "0.Solution Items", "{AC977C50-0259-46C5-B033-8CAC5BE75E8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +56,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{42C7CEED-2C1B-4907-9483-3FC035B864DA} = {CD0A00A9-D454-48AC-B15D-8F8A7DDA64CF}
+		{B31551AB-8E84-4F69-AAC7-6C1FC23C821D} = {74DF52C4-F6A5-45B5-B08A-BF24338E6605}
+		{4F38B299-8FD0-493D-9703-99E610A426F6} = {74DF52C4-F6A5-45B5-B08A-BF24338E6605}
+		{B729DFD7-BB7A-4DA0-A765-9FA5C432B1A2} = {E10415BA-DC90-4C8A-A37C-E4B8623C0CB1}
+		{94288C66-C0F9-41B2-8261-BCCA13828A1D} = {E10415BA-DC90-4C8A-A37C-E4B8623C0CB1}
+		{B92AD4C9-5437-435B-9BC2-542038EF8273} = {CD0A00A9-D454-48AC-B15D-8F8A7DDA64CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {77E52A8C-D102-4027-81AD-2DC9861EBEAE}
