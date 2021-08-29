@@ -32,5 +32,7 @@ namespace eShopSolution.App.Catalog.Products
         Task<int> UpdateImage(int imageId, string caption, bool isDefault);
 
         Task<List<ProductImageViewModel>> GetListImages(int productId);
+
+        Task<ProductViewModel> GetById(int productId, string languageId);
     }
 }

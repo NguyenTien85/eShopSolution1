@@ -1,4 +1,5 @@
 using eShopSolution.App.Catalog.Products;
+using eShopSolution.App.Common;
 using eShopSolution.Data.EF;
 using eShopSolution.Utilities.Constants;
 using Microsoft.AspNetCore.Builder;
@@ -33,8 +34,9 @@ namespace eShopSolution.BackendApi
             );
             //khai bao DI services
             services.AddTransient<IPublicProductService, PublicProductService>();
+            services.AddTransient<IStorageService, FileStorageService>();            
+            services.AddTransient<IManageProductService, ManageProductService>();
 
-            
 
             //
             services.AddControllersWithViews();
