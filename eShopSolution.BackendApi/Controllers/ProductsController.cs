@@ -28,15 +28,6 @@ namespace eShopSolution.BackendApi.Controllers
         //PublicProductService
         //-------------------------------------------------------------------------------
 
-        //http://localhost:port/api/products/vi-VN
-        [HttpGet("{languageId}")]
-        public async Task<IActionResult> GetAll(string languageId)
-        {
-            var products = await _publicProductService.GetAll(languageId);
-
-            return Ok(products);
-        }
-
         //http://localhost:port/api/products?pageIndex=5&pageSize=20&CategoryId=2
         [HttpGet("{languageId}")]
         public async Task<IActionResult> GetAllPaging(string languageId, [FromQuery] GetPublicProductPagingRequest request)
