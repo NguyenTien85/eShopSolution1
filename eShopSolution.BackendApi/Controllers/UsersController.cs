@@ -35,10 +35,11 @@ namespace eShopSolution.BackendApi.Controllers
             {
                 return BadRequest("Username or Password is not correct!");
             }
+
             return Ok(resultToken);
         }
 
-        [HttpPost("register")]
+        [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
@@ -52,6 +53,15 @@ namespace eShopSolution.BackendApi.Controllers
                 return BadRequest("Register not successful");
             }
             return Ok();
+        }
+
+        //http://localhost:port/api/users/paging?pageIndex=1&pageSize=10&Keyword=
+        [HttpGet("paging")]
+        public async Task<IActionResult> GetUserPaging([FromQuery] GetUserPagingRequest request)
+        {
+            var pageResult = await _userService.GetUserPaging(request);
+
+            return Ok(pageResult);
         }
     }
 }

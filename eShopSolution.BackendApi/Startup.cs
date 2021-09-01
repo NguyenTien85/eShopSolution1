@@ -46,9 +46,8 @@ namespace eShopSolution.BackendApi
                 .AddEntityFrameworkStores<eShopDbContext>()
                 .AddDefaultTokenProviders();
             //khai bao DI services
-            services.AddTransient<IPublicProductService, PublicProductService>();
             services.AddTransient<IStorageService, FileStorageService>();
-            services.AddTransient<IManageProductService, ManageProductService>();
+            services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IUserService, UserService>();
 
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();

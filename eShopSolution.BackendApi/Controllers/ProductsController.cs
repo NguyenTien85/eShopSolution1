@@ -17,13 +17,11 @@ namespace eShopSolution.BackendApi.Controllers
     [Authorize]
     public class ProductsController : ControllerBase
     {
-        private readonly IPublicProductService _publicProductService;
-        private readonly IManageProductService _manageProductService;
+        private readonly IProductService _productService;
 
-        public ProductsController(IPublicProductService publicProductService, IManageProductService manageProductService)
+        public ProductsController(IProductService productService)
         {
-            _publicProductService = publicProductService;
-            _manageProductService = manageProductService;
+            _productService = productService;
         }
 
         //-------------------------------------------------------------------------------
@@ -34,7 +32,7 @@ namespace eShopSolution.BackendApi.Controllers
         [HttpGet("{languageId}")]
         public async Task<IActionResult> GetAllPaging(string languageId, [FromQuery] GetPublicProductPagingRequest request)
         {
-            var pageResult = await _publicProductService.GetAllByCategoryId(languageId, request);
+            var pageResult = await _productService.GetAllByCategoryId(languageId, request);
 
             return Ok(pageResult);
         }
@@ -47,7 +45,7 @@ namespace eShopSolution.BackendApi.Controllers
         [HttpGet("{productId}/{languageId}")]
         public async Task<IActionResult> GetById(int productId, string languageId)
         {
-            var product = await _manageProductService.GetById(productId, languageId);
+            var product = await _productService.GetById(productId, languageId);
 
             if (product == null)
             {
@@ -65,13 +63,13 @@ namespace eShopSolution.BackendApi.Controllers
             {
                 return BadRequest();
             }
-            var productId = await _manageProductService.Create(request);
+            var productId = await _productService.Create(request);
             if (productId == 0)
             {
                 return BadRequest();
             }
 
-            var product = await _manageProductService.GetById(productId, request.LanguageId);
+            var product = await _productService.GetById(productId, request.LanguageId);
 
             return CreatedAtAction(nameof(GetById), new { id = productId }, product);
         }
@@ -85,7 +83,7 @@ namespace eShopSolution.BackendApi.Controllers
                 return BadRequest();
             }
 
-            var affectedResult = await _manageProductService.Update(request);
+            var affectedResult = await _productService.Update(request);
             if (affectedResult == 0)
             {
                 return BadRequest();
@@ -98,7 +96,7 @@ namespace eShopSolution.BackendApi.Controllers
         [HttpDelete("{productId}")]
         public async Task<IActionResult> Delete(int productId)
         {
-            var affectedResult = await _manageProductService.Delete(productId);
+            var affectedResult = await _productService.Delete(productId);
             if (affectedResult == 0)
             {
                 return BadRequest();
@@ -111,7 +109,7 @@ namespace eShopSolution.BackendApi.Controllers
         [HttpPatch("RevisePrice/{productId}/{newPrice}")]
         public async Task<IActionResult> UpdatePrice(int productId, decimal newPrice)
         {
-            var result = await _manageProductService.UpdatePrice(productId, newPrice);
+            var result = await _productService.UpdatePrice(productId, newPrice);
             if (result == false)
             {
                 return BadRequest();
@@ -124,7 +122,7 @@ namespace eShopSolution.BackendApi.Controllers
         [HttpPatch("ReviseStock/{productId}/{addedQuantity}")]
         public async Task<IActionResult> UpdateStock(int productId, int addedQuantity)
         {
-            var result = await _manageProductService.UpdateStock(productId, addedQuantity);
+            var result = await _productService.UpdateStock(productId, addedQuantity);
             if (result == false)
             {
                 return BadRequest();
@@ -136,7 +134,7 @@ namespace eShopSolution.BackendApi.Controllers
         [HttpGet("{productId}/images/{imageId}")]
         public async Task<IActionResult> GetProductImageById(int imageId)
         {
-            var productImage = await _manageProductService.GetProductImageById(imageId);
+            var productImage = await _productService.GetProductImageById(imageId);
 
             if (productImage == null)
             {
@@ -154,13 +152,13 @@ namespace eShopSolution.BackendApi.Controllers
             {
                 return BadRequest();
             }
-            var imageId = await _manageProductService.AddImage(productId, request);
+            var imageId = await _productService.AddImage(productId, request);
             if (imageId == 0)
             {
                 return BadRequest();
             }
 
-            var productImageViewModel = await _manageProductService.GetProductImageById(imageId);
+            var productImageViewModel = await _productService.GetProductImageById(imageId);
 
             return CreatedAtAction(nameof(GetProductImageById), new { id = imageId }, productImageViewModel);
         }
@@ -173,7 +171,7 @@ namespace eShopSolution.BackendApi.Controllers
             {
                 return BadRequest();
             }
-            var result = await _manageProductService.UpdateImage(imageId, request);
+            var result = await _productService.UpdateImage(imageId, request);
             if (result == 0)
             {
                 return BadRequest();
@@ -190,7 +188,7 @@ namespace eShopSolution.BackendApi.Controllers
             {
                 return BadRequest();
             }
-            var result = await _manageProductService.RemoveImage(imageId);
+            var result = await _productService.RemoveImage(imageId);
             if (result == 0)
             {
                 return BadRequest();
