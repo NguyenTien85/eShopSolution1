@@ -35,14 +35,13 @@ namespace eShopSolution.AdminApp.Controllers
             var session = HttpContext.Session.GetString("Token");
             var request = new GetUserPagingRequest()
             {
-                BearerToken = session,
                 Keyword = keyword,
                 PageIndex = pageIndex,
                 PageSize = pageSize
             };
             var data = await _userApiClient.GetUserPaging(request);
 
-            return View(data);
+            return View(data.ResultObj);
         }
 
         [HttpGet]
@@ -59,8 +58,46 @@ namespace eShopSolution.AdminApp.Controllers
                 return View();
             }
             var result = await _userApiClient.RegisterUser(request);
-            if (result)
+            if (result.IsSucceeded)
                 return RedirectToAction("Index");
+
+            ModelState.AddModelError("", result.Message);
+            return View(request);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var result = await _userApiClient.GetUserById(id);
+            if (result.IsSucceeded)
+            {
+                var user = result.ResultObj;
+                var userUpdateRequest = new UserUpdateRequest()
+                {
+                    Id = user.Id,
+                    DoB = user.Dob,
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    PhoneNumber = user.PhoneNumber
+                };
+                return View(userUpdateRequest);
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(UserUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            var result = await _userApiClient.UpdateUser(request.Id, request);
+            if (result.IsSucceeded)
+                return RedirectToAction("Index");
+
+            ModelState.AddModelError("", result.Message);
             return View(request);
         }
 
