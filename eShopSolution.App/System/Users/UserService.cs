@@ -3,6 +3,7 @@ using eShopSolution.Utilities.Exceptions;
 using eShopSolution.ViewModels.Common;
 using eShopSolution.ViewModels.System.Users;
 using eShopSolution.ViewModels.System.Users.Request;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -28,7 +29,8 @@ namespace eShopSolution.App.System.Users
 
         public UserService(UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
-            RoleManager<AppRole> roleManager, IConfiguration config)
+            RoleManager<AppRole> roleManager,
+            IConfiguration config)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -36,18 +38,17 @@ namespace eShopSolution.App.System.Users
             _config = config;
         }
 
-        public async Task<string> Authenticate(LoginRequest request)
+        public async Task<ApiResult<string>> Authenticate(LoginRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
-
             if (user == null)
             {
-                return null;
+                return new ApiErrorResult<string>($"Username {request.UserName} not correct");
             }
             var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
             if (!result.Succeeded)
             {
-                return null;
+                return new ApiErrorResult<string>("Password not correct");
             }
 
             var roles = await _userManager.GetRolesAsync(user);
@@ -70,10 +71,30 @@ namespace eShopSolution.App.System.Users
                 signingCredentials: creds
                 );
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return new ApiSuccessResult<string>(new JwtSecurityTokenHandler().WriteToken(token));
         }
 
-        public async Task<PagedResult<UserViewModel>> GetUserPaging(GetUserPagingRequest request)
+        public async Task<ApiResult<UserViewModel>> GetUserById(Guid id)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user == null)
+            {
+                return new ApiErrorResult<UserViewModel>($"User with id {id} not existed");
+            }
+            var userViewModel = new UserViewModel()
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                Id = id,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+                Dob = user.DoB
+            };
+            return new ApiSuccessResult<UserViewModel>(userViewModel);
+        }
+
+        public async Task<ApiResult<PagedResult<UserViewModel>>> GetUserPaging(GetUserPagingRequest request)
         {
             var query = _userManager.Users;
             if (!string.IsNullOrEmpty(request.Keyword))
@@ -100,15 +121,27 @@ namespace eShopSolution.App.System.Users
             //4. Select and Projection
             var pagedResult = new PagedResult<UserViewModel>()
             {
-                TotalRecord = totalRow,
+                TotalRecords = totalRow,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
                 Items = data
             };
 
-            return pagedResult;
+            return new ApiSuccessResult<PagedResult<UserViewModel>>(pagedResult);
         }
 
-        public async Task<bool> Register(RegisterRequest request)
+        public async Task<ApiResult<bool>> Register(RegisterRequest request)
         {
+            //check new user is exist in database or not:
+            if (await _userManager.FindByNameAsync(request.UserName) != null)
+            {
+                return new ApiErrorResult<bool>("This Username is existed");
+            }
+            if (await _userManager.FindByEmailAsync(request.Email) != null)
+            {
+                return new ApiErrorResult<bool>("This Email is registered");
+            }
+            //if not exist, create the new one
             var user = new AppUser()
             {
                 DoB = request.DoB,
@@ -122,12 +155,34 @@ namespace eShopSolution.App.System.Users
             var result = await _userManager.CreateAsync(user, request.Password);
             if (result.Succeeded)
             {
-                return true;
+                return new ApiSuccessResult<bool>();
             }
-            else
+            return new ApiErrorResult<bool>("Register Fail");
+        }
+
+        public async Task<ApiResult<bool>> Update(Guid id, UserUpdateRequest request)
+        {
+            //check new user is exist in database or not:
+
+            if (await _userManager.Users.AnyAsync(x => x.Email == request.Email && x.Id != id))
             {
-                return false;
+                return new ApiErrorResult<bool>("This Email is registered");
             }
+            //if not email existed, find out current user based on id
+            var user = await _userManager.FindByIdAsync(id.ToString());
+
+            user.DoB = request.DoB;
+            user.Email = request.Email;
+            user.FirstName = request.FirstName;
+            user.LastName = request.LastName;
+            user.PhoneNumber = request.PhoneNumber;
+
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                return new ApiSuccessResult<bool>();
+            }
+            return new ApiErrorResult<bool>("Update Fail");
         }
     }
 }

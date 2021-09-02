@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace eShopSolution.AdminApp.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         private readonly IUserApiClient _userApiClient;
         private readonly IConfiguration _configuration;
@@ -30,49 +30,87 @@ namespace eShopSolution.AdminApp.Controllers
             _configuration = configuration;
         }
 
-        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 10)
+        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 1)
         {
             var session = HttpContext.Session.GetString("Token");
             var request = new GetUserPagingRequest()
             {
-                BearerToken = session,
                 Keyword = keyword,
                 PageIndex = pageIndex,
                 PageSize = pageSize
             };
             var data = await _userApiClient.GetUserPaging(request);
 
-            return View(data);
+            return View(data.ResultObj);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Login()
+        public IActionResult Create()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginRequest request)
+        public async Task<IActionResult> Create(RegisterRequest request)
         {
             if (!ModelState.IsValid)
-                return View(ModelState);
-            var token = await _userApiClient.Authenticate(request);
-
-            var userPrincipal = this.ValidateToken(token);
-            var authProperties = new AuthenticationProperties
             {
-                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
-                IsPersistent = true
-            };
-            HttpContext.Session.SetString("Token", token);
+                return View();
+            }
+            var result = await _userApiClient.RegisterUser(request);
+            if (result.IsSucceeded)
+                return RedirectToAction("Index");
 
-            await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                userPrincipal,
-                authProperties
-                );
-            return RedirectToAction("Index", "Home");
+            ModelState.AddModelError("", result.Message);
+            return View(request);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var result = await _userApiClient.GetUserById(id);
+            if (result.IsSucceeded)
+            {
+                var user = result.ResultObj;
+                var userUpdateRequest = new UserUpdateRequest()
+                {
+                    Id = user.Id,
+                    DoB = user.Dob,
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    PhoneNumber = user.PhoneNumber
+                };
+                return View(userUpdateRequest);
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(UserUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            var result = await _userApiClient.UpdateUser(request.Id, request);
+            if (result.IsSucceeded)
+                return RedirectToAction("Index");
+
+            ModelState.AddModelError("", result.Message);
+            return View(request);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var result = await _userApiClient.GetUserById(id);
+            if (result.IsSucceeded)
+            {
+                var user = result.ResultObj;
+                return View(user);
+            }
+            return View();
         }
 
         [HttpPost]
@@ -81,24 +119,6 @@ namespace eShopSolution.AdminApp.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             HttpContext.Session.Remove("Token");
             return RedirectToAction("Login", "User");
-        }
-
-        private ClaimsPrincipal ValidateToken(string jwtToken)
-        {
-            IdentityModelEventSource.ShowPII = true;
-
-            SecurityToken validatedToken;
-            TokenValidationParameters validationParameters = new TokenValidationParameters();
-
-            validationParameters.ValidateLifetime = true;
-
-            validationParameters.ValidAudience = _configuration["Tokens:Issuer"];
-            validationParameters.ValidIssuer = _configuration["Tokens:Issuer"];
-            validationParameters.IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Tokens:Key"]));
-
-            ClaimsPrincipal principal = new JwtSecurityTokenHandler().ValidateToken(jwtToken, validationParameters, out validatedToken);
-
-            return principal;
         }
     }
 }

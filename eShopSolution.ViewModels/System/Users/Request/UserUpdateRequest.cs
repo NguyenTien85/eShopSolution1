@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace eShopSolution.ViewModels.System.Users.Request
 {
-    public class RegisterRequest
+    public class UserUpdateRequest
     {
+        public Guid Id { get; set; }
+
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
@@ -23,9 +25,5 @@ namespace eShopSolution.ViewModels.System.Users.Request
 
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
-
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string ConfirmPassword { get; set; }
     }
 }
