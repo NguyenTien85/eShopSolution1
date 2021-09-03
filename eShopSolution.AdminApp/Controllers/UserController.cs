@@ -30,7 +30,7 @@ namespace eShopSolution.AdminApp.Controllers
             _configuration = configuration;
         }
 
-        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 2)
+        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 100)
         {
             var session = HttpContext.Session.GetString("Token");
             var request = new GetUserPagingRequest()
@@ -40,7 +40,11 @@ namespace eShopSolution.AdminApp.Controllers
                 PageSize = pageSize
             };
             var data = await _userApiClient.GetUserPaging(request);
-
+            ViewBag.Keyword = keyword;
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMessage = TempData["result"].ToString();
+            }
             return View(data.ResultObj);
         }
 
@@ -59,7 +63,10 @@ namespace eShopSolution.AdminApp.Controllers
             }
             var result = await _userApiClient.RegisterUser(request);
             if (result.IsSucceeded)
+            {
+                TempData["result"] = "Create user success";
                 return RedirectToAction("Index");
+            }
 
             ModelState.AddModelError("", result.Message);
             return View(request);
@@ -95,7 +102,10 @@ namespace eShopSolution.AdminApp.Controllers
             }
             var result = await _userApiClient.UpdateUser(request.Id, request);
             if (result.IsSucceeded)
+            {
+                TempData["result"] = "Update user success";
                 return RedirectToAction("Index");
+            }
 
             ModelState.AddModelError("", result.Message);
             return View(request);
@@ -118,7 +128,7 @@ namespace eShopSolution.AdminApp.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             HttpContext.Session.Remove("Token");
-            return RedirectToAction("Login", "User");
+            return RedirectToAction("Index", "Login");
         }
 
         [HttpGet]
@@ -139,7 +149,10 @@ namespace eShopSolution.AdminApp.Controllers
             }
             var result = await _userApiClient.DeleteUser(request.Id);
             if (result.IsSucceeded)
+            {
+                TempData["result"] = "Delete user success";
                 return RedirectToAction("Index");
+            }
 
             ModelState.AddModelError("", result.Message);
             return View(request);
