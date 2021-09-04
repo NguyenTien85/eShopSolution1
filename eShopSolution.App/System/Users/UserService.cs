@@ -94,6 +94,7 @@ namespace eShopSolution.App.System.Users
             {
                 return new ApiErrorResult<UserViewModel>($"User with id {id} not existed");
             }
+            var userRoles = await _userManager.GetRolesAsync(user);
             var userViewModel = new UserViewModel()
             {
                 UserName = user.UserName,
@@ -102,8 +103,10 @@ namespace eShopSolution.App.System.Users
                 Id = id,
                 LastName = user.LastName,
                 PhoneNumber = user.PhoneNumber,
-                Dob = user.DoB
+                Dob = user.DoB,
+                Roles = userRoles.ToList()
             };
+
             return new ApiSuccessResult<UserViewModel>(userViewModel);
         }
 
@@ -171,6 +174,29 @@ namespace eShopSolution.App.System.Users
                 return new ApiSuccessResult<bool>();
             }
             return new ApiErrorResult<bool>("Register Fail");
+        }
+
+        public async Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user == null)
+            {
+                return new ApiErrorResult<bool>($"User with id {id} not existed");
+            }
+
+            var removedRoles = request.Roles.Where(x => x.Selected == false).Select(x => x.Name);
+            await _userManager.RemoveFromRolesAsync(user, removedRoles);
+
+            var addedRoles = request.Roles.Where(x => x.Selected == true).Select(x => x.Name);
+            foreach (var role in addedRoles)
+            {
+                if (await _userManager.IsInRoleAsync(user, role) == false)
+                {
+                    await _userManager.AddToRoleAsync(user, role);
+                }
+            }
+
+            return new ApiSuccessResult<bool>();
         }
 
         public async Task<ApiResult<bool>> Update(Guid id, UserUpdateRequest request)
