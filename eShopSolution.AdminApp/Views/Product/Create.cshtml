@@ -4,6 +4,23 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@section Scripts{
+    <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#txt_details'), {
+                // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+            })
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
+    </script>
+}
+
 <div class="container-fluid px-4">
     <h1 class="mt-4">Create Product</h1>
     <ol class="breadcrumb mb-4">
@@ -42,7 +59,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label asp-for="Description" class="control-label"></label>
-                        <input asp-for="Description" class="form-control" />
+                        <textarea id="txt_details" asp-for="Description" rows="8" class="form-control"> </textarea>
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-4">

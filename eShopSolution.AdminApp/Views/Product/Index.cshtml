@@ -22,7 +22,15 @@
             </div>
         </div>
         <div class="card-body">
-            <table class="table">
+            @if (@ViewBag.SuccessMessage != null)
+            {
+                <div class="row">
+                    <div id="msgAlert" class="alert alert-success" role="alert">
+                        @ViewBag.SuccessMessage
+                    </div>
+                </div>
+            }
+            <table id="datatablesSimple">
                 <thead>
                     <tr>
                         <th>
@@ -120,5 +128,6 @@
                 </tbody>
             </table>
         </div>
+        @*@await Component.InvokeAsync("Pager", Model)*@
     </div>
 </div>
