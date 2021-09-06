@@ -1,0 +1,124 @@
+﻿@using eShopSolution.ViewModels.Catalog.Products
+@using eShopSolution.ViewModels.Common
+@model PagedResult<ProductViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Product List</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/">MainPage</a></li>
+        <li class="breadcrumb-item active">Product List</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <a class="btn btn-success" asp-action="Create" asp-controller="Product">New Product</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+                        <th>
+                            Price
+                        </th>
+                        <th>
+                            Original Price
+                        </th>
+                        <th>
+                            Stock
+                        </th>
+                        <th>
+                            ViewCount
+                        </th>
+                        <th>
+                            Date Created
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Details
+                        </th>
+                        <th>
+                            SeoDescription
+                        </th>
+                        <th>
+                            SeoTitle
+                        </th>
+                        <th>
+                            SeoAlias
+                        </th>
+                        <th>
+                            LanguageId
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OriginalPrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Stock)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ViewCount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateCreated)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Details)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SeoDescription)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SeoTitle)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SeoAlias)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LanguageId)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

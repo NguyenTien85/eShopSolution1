@@ -1,6 +1,7 @@
 ﻿using eShopSolution.App.Common;
 using eShopSolution.Data.EF;
 using eShopSolution.Data.Entities;
+using eShopSolution.Utilities.Constants;
 using eShopSolution.Utilities.Exceptions;
 using eShopSolution.ViewModels.Catalog.ProductImages;
 using eShopSolution.ViewModels.Catalog.ProductImages.Request;
@@ -9,6 +10,7 @@ using eShopSolution.ViewModels.Catalog.Products.Request;
 using eShopSolution.ViewModels.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -128,10 +130,18 @@ namespace eShopSolution.App.Catalog.Products
         public async Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request)
         {
             //1. select
-            var query = from p in _context.Products
-                        join pt in _context.ProductTranslations on p.Id equals pt.ProductId
-                        join pic in _context.ProductInCategories on pt.ProductId equals pic.ProductId
-                        join c in _context.Categories on pic.CategoryId equals c.Id
+            var query = from p in _context.Products                                             //from  _context.Products as p
+                        join pt in _context.ProductTranslations on p.Id equals pt.ProductId     //join _context.ProductTranslations as pt on pt.ProductId = p.Id
+
+                        from pic in _context.ProductInCategories                                //left join _context.ProductInCategories as pic on pic.ProductId = pt.ProductId
+                            .Where(x => x.ProductId == pt.ProductId)
+                            .DefaultIfEmpty()
+
+                        from c in _context.Categories                                           //left join _context.Categories as c on c.Id = pic.CategoryId
+                            .Where(x => x.Id == pic.CategoryId)
+                            .DefaultIfEmpty()
+                           
+                        where pt.LanguageId == request.LanguageId
                         select new { p, pt, pic };
 
             //2. Filtering
@@ -140,7 +150,7 @@ namespace eShopSolution.App.Catalog.Products
                 query.Where(x => x.pt.Name.Contains(request.Keyword));
             }
 
-            if (request.CategoryIds.Count > 0)
+            if (request.CategoryIds != null && request.CategoryIds.Count > 0)
             {
                 query.Where(x => request.CategoryIds.Contains(x.pic.CategoryId));
             }
