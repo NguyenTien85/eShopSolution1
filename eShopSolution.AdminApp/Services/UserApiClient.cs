@@ -14,19 +14,12 @@ using System.Threading.Tasks;
 
 namespace eShopSolution.AdminApp.Services
 {
-    public class UserApiClient : IUserApiClient
+    public class UserApiClient : BaseApiClient, IUserApiClient
     {
-        private readonly IHttpClientFactory _httpClientFactory;
-        private readonly IConfiguration _configuration;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-
         public UserApiClient(IHttpClientFactory httpClientFactory,
             IConfiguration configuration,
-            IHttpContextAccessor httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor) : base(httpClientFactory, configuration, httpContextAccessor)
         {
-            _httpClientFactory = httpClientFactory;
-            _configuration = configuration;
-            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<ApiResult<string>> Authenticate(LoginRequest request)
@@ -48,40 +41,32 @@ namespace eShopSolution.AdminApp.Services
 
         public async Task<ApiResult<bool>> DeleteUser(Guid id)
         {
-            var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
-
-            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
-
-            var response = await client.DeleteAsync($"/api/users/{id}");
-            var body = await response.Content.ReadAsStringAsync();
-
-            if (response.IsSuccessStatusCode)
-            {
-                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(body);
-            }
-
-            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(body);
+            return await DeleteAsync($"/api/users/{id}");
         }
 
         public async Task<ApiResult<UserViewModel>> GetUserById(Guid id)
         {
-            var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
-
-            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
-
-            var response = await client.GetAsync($"/api/users/{id}");
-            var body = await response.Content.ReadAsStringAsync();
-            if (response.IsSuccessStatusCode)
-            {
-                return JsonConvert.DeserializeObject<ApiSuccessResult<UserViewModel>>(body);
-            }
-
-            return JsonConvert.DeserializeObject<ApiErrorResult<UserViewModel>>(body);
+            return await GetAsync<ApiResult<UserViewModel>>($"/api/users/{id}");
+            //return await GetAsync<UserViewModel>($"/api/users/{id}");
         }
+
+        //public async Task<ApiResult<UserViewModel>> GetUserById(Guid id)
+        //{
+        //    var client = _httpClientFactory.CreateClient();
+        //    client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+
+        //    var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+        //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+        //    var response = await client.GetAsync($"/api/users/{id}");
+        //    var body = await response.Content.ReadAsStringAsync();
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        return JsonConvert.DeserializeObject<ApiSuccessResult<UserViewModel>>(body);
+        //    }
+
+        //    return JsonConvert.DeserializeObject<ApiErrorResult<UserViewModel>>(body);
+        //}
 
         public async Task<ApiResult<PagedResult<UserViewModel>>> GetUserPaging(GetUserPagingRequest request)
         {

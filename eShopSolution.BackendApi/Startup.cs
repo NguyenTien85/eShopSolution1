@@ -1,5 +1,6 @@
 using eShopSolution.App.Catalog.Products;
 using eShopSolution.App.Common;
+using eShopSolution.App.System.Languages;
 using eShopSolution.App.System.Roles;
 using eShopSolution.App.System.Users;
 using eShopSolution.Data.EF;
@@ -51,6 +52,7 @@ namespace eShopSolution.BackendApi
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<ILanguageService, LanguageService>();
 
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
