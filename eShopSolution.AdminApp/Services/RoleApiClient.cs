@@ -21,9 +21,9 @@ namespace eShopSolution.AdminApp.Services
         {
         }
 
-        public async Task<ApiResult<List<RoleViewModel>>> GetAll()
+        public async Task<List<RoleViewModel>> GetAll()
         {
-            return await GetAsync<ApiResult<List<RoleViewModel>>>($"/api/roles");
+            return await GetAsync<List<RoleViewModel>>($"/api/roles");
         }
     }
 }

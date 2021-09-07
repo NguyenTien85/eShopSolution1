@@ -39,7 +39,7 @@ namespace eShopSolution.AdminApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Language(NavigationViewModel navigationViewModel)
+        public IActionResult Language(NavigationViewModel navigationViewModel)
         {
             HttpContext.Session.SetString(SystemConstants.AppSettings.DefaultLanguageId, navigationViewModel.CurrentLanguageId);
             return RedirectToAction("Index");

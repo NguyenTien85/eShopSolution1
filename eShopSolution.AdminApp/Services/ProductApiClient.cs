@@ -1,4 +1,5 @@
 ﻿using eShopSolution.Utilities.Constants;
+using eShopSolution.ViewModels.Catalog.Categories.Request;
 using eShopSolution.ViewModels.Catalog.Products;
 using eShopSolution.ViewModels.Catalog.Products.Request;
 using eShopSolution.ViewModels.Common;
@@ -30,7 +31,8 @@ namespace eShopSolution.AdminApp.Services
                  $"/api/products/paging?pageIndex={request.PageIndex}" +
                  $"&pageSize={request.PageSize}" +
                  $"&keyword={request.Keyword}" +
-                 $"&languageId={request.LanguageId}");
+                 $"&languageId={request.LanguageId}" +
+                 $"&categoryId={request.CategoryId}");
 
             return data;
         }
@@ -73,6 +75,32 @@ namespace eShopSolution.AdminApp.Services
 
             var response = await client.PostAsync("/api/products", requestContent);
             return response.IsSuccessStatusCode;
+        }
+
+        public async Task<ApiResult<bool>> CategoryAssign(CategoryAssignRequest request)
+        {
+            var json = JsonConvert.SerializeObject(request);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var response = await client.PutAsync($"/api/products/{request.Id}/categories", httpContent);
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
+            }
+            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
+        }
+
+        public async Task<ProductViewModel> GetProductById(int id)
+        {
+            var languageId = _httpContextAccessor.HttpContext.Session.GetString(SystemConstants.AppSettings.DefaultLanguageId);
+            return await GetAsync<ProductViewModel>($"/api/products/{id}/{languageId}");
         }
     }
 }

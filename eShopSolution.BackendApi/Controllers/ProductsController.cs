@@ -1,4 +1,5 @@
 ﻿using eShopSolution.App.Catalog.Products;
+using eShopSolution.ViewModels.Catalog.Categories.Request;
 using eShopSolution.ViewModels.Catalog.ProductImages.Request;
 using eShopSolution.ViewModels.Catalog.Products.Request;
 using Microsoft.AspNetCore.Authorization;
@@ -185,6 +186,22 @@ namespace eShopSolution.BackendApi.Controllers
             }
 
             return Ok();
+        }
+
+        //PUT: http://localhost/api/products/{id}/categories
+        [HttpPut("{id}/categories")]
+        public async Task<IActionResult> CategoryAssign([FromBody] CategoryAssignRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _productService.CategoryAssign(request);
+            if (!result.IsSucceeded)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
         }
     }
 }

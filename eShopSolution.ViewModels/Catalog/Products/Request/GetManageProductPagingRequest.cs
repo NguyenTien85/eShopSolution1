@@ -13,6 +13,6 @@ namespace eShopSolution.ViewModels.Catalog.Products.Request
 
         public string LanguageId { get; set; }
 
-        public List<int> CategoryIds { get; set; }
+        public int? CategoryId { get; set; }
     }
 }

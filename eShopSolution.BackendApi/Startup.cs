@@ -1,3 +1,4 @@
+using eShopSolution.App.Catalog.Categories;
 using eShopSolution.App.Catalog.Products;
 using eShopSolution.App.Common;
 using eShopSolution.App.System.Languages;
@@ -53,6 +54,7 @@ namespace eShopSolution.BackendApi
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<ILanguageService, LanguageService>();
+            services.AddTransient<ICategoryService, CategoryService>();
 
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();

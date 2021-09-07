@@ -1,4 +1,5 @@
-﻿using eShopSolution.ViewModels.Catalog.Products;
+﻿using eShopSolution.ViewModels.Catalog.Categories.Request;
+using eShopSolution.ViewModels.Catalog.Products;
 using eShopSolution.ViewModels.Catalog.Products.Request;
 using eShopSolution.ViewModels.Common;
 using System;
@@ -14,5 +15,9 @@ namespace eShopSolution.AdminApp.Services
         Task<bool> CreateProduct(ProductCreateRequest request);
 
         Task<PagedResult<ProductViewModel>> GetPaging(GetManageProductPagingRequest request);
+
+        Task<ApiResult<bool>> CategoryAssign(CategoryAssignRequest request);
+
+        Task<ProductViewModel> GetProductById(int id);
     }
 }
