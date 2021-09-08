@@ -24,7 +24,7 @@ namespace eShopSolution.ViewModels.Catalog.Products
 
         public string SeoAlias { get; set; }
         public string LanguageId { set; get; }
-
+        public bool? IsFeatured { get; set; }
         public List<string> Categories { get; set; } = new List<string>();//store all categoryIds of current product
     }
 }

@@ -72,6 +72,7 @@ namespace eShopSolution.App.Catalog.Products
                 Stock = request.Stock,
                 ViewCount = 0,
                 DateCreated = DateTime.Now,
+                IsFeatured = request.IsFeatured,
                 ProductTranslations = new List<ProductTranslation>()
                 {
                     new ProductTranslation()
@@ -175,7 +176,8 @@ namespace eShopSolution.App.Catalog.Products
                     SeoDescription = x.pt.SeoDescription,
                     SeoTitle = x.pt.SeoTitle,
                     Stock = x.p.Stock,
-                    ViewCount = x.p.ViewCount
+                    ViewCount = x.p.ViewCount,
+                    IsFeatured = x.p.IsFeatured
                 })
                 .ToListAsync();
 
@@ -221,7 +223,8 @@ namespace eShopSolution.App.Catalog.Products
                 SeoTitle = productTranslation.SeoTitle,
                 Stock = product.Stock,
                 ViewCount = product.ViewCount,
-                Categories = categories
+                Categories = categories,
+                IsFeatured = product.IsFeatured
             };
             return productViewModel;
         }
@@ -285,6 +288,8 @@ namespace eShopSolution.App.Catalog.Products
             {
                 throw new eShopException($"Can not find product with Id: {request.Id}");
             }
+            product.IsFeatured = request.IsFeatured;
+
             productTranslation.Name = request.Name;
             productTranslation.SeoAlias = request.SeoAlias;
             productTranslation.SeoDescription = request.SeoDescription;
