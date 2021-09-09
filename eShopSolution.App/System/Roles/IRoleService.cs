@@ -1,9 +1,5 @@
-﻿using eShopSolution.ViewModels.Common;
-using eShopSolution.ViewModels.System.Roles;
-using System;
+﻿using eShopSolution.ViewModels.System.Roles;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace eShopSolution.App.System.Roles

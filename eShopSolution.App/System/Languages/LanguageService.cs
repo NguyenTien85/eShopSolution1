@@ -3,10 +3,8 @@ using eShopSolution.ViewModels.Common;
 using eShopSolution.ViewModels.System.Languages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace eShopSolution.App.System.Languages

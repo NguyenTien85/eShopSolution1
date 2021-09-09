@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace eShopSolution.Utilities.Constants
+﻿namespace eShopSolution.Utilities.Constants
 {
     public class SystemConstants
     {
@@ -15,6 +9,12 @@ namespace eShopSolution.Utilities.Constants
             public const string DefaultLanguageId = "DefaultLanguageId";
             public const string Token = "Token";
             public const string BaseAddress = "BaseAddress";
+        }
+
+        public class ProductSettings
+        {
+            public const int FeaturedProductTakeOut = 10;
+            public const int LatestProductTakeOut = 9;
         }
     }
 }

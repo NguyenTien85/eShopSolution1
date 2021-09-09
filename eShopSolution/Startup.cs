@@ -12,6 +12,8 @@ using LazZiya.ExpressLocalization;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using eShopSolution.WebApp.LocalizationResources;
+using eShopSolution.ApiIntegration;
+using Microsoft.AspNetCore.Http;
 
 namespace eShopSolution
 {
@@ -27,6 +29,8 @@ namespace eShopSolution
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpClient();
+
             var cultures = new[]
             {
                 new CultureInfo("vi"),
@@ -62,6 +66,15 @@ namespace eShopSolution
                         o.DefaultRequestCulture = new RequestCulture("vi");
                     };
                 });
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<ISlideApiClient, SlideApiClient>();
+            services.AddTransient<IProductApiClient, ProductApiClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,6 +96,7 @@ namespace eShopSolution
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseRequestLocalization();
             app.UseEndpoints(endpoints =>

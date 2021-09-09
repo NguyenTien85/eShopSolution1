@@ -194,7 +194,7 @@ namespace eShopSolution.Data.Migrations
                         new
                         {
                             Id = new Guid("342d0c2b-adf6-4b25-a631-7242cd9472c4"),
-                            ConcurrencyStamp = "9b35adfc-d950-427a-875d-412a6f321c45",
+                            ConcurrencyStamp = "4ea6c755-3da9-4116-9b64-2b2ad118cfd8",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -284,7 +284,7 @@ namespace eShopSolution.Data.Migrations
                         {
                             Id = new Guid("b08221c3-af8c-4297-b0a7-73d70f660359"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "33f23b0e-a1e9-4ba7-91e5-5b21b6df74cc",
+                            ConcurrencyStamp = "523075a5-5d23-4e3e-9d4d-7855fa0a9a92",
                             DoB = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "nmt08051985@gmail.com",
                             EmailConfirmed = true,
@@ -293,7 +293,7 @@ namespace eShopSolution.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "nmt08051985@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEP9whlHspgNlEaY9HYX24YE6GZHGDTY2OJP0pgXyaVBmxs5xWnTVSU8iH1VpbK9o7w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKtctBGIoxgmaKlsmub+tbD/NEPRdulJ8p/orJgZGQB5Ka9sImTC50QReLSnDF/Hrg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -375,6 +375,20 @@ namespace eShopSolution.Data.Migrations
                             IsShowOnHome = true,
                             SortOrder = 2,
                             Status = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsShowOnHome = true,
+                            SortOrder = 1,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsShowOnHome = true,
+                            SortOrder = 2,
+                            Status = 1
                         });
                 });
 
@@ -428,40 +442,80 @@ namespace eShopSolution.Data.Migrations
                             Id = 1,
                             CategoryId = 1,
                             LanguageId = "vi",
-                            Name = "Áo nam",
-                            SeoAlias = "ao-nam",
-                            SeoDescription = "Sản phẩm áo thời trang nam",
-                            SeoTitle = "Sản phẩm áo thời trang nam"
+                            Name = "máy ảnh",
+                            SeoAlias = "may-anh",
+                            SeoDescription = "máy ảnh",
+                            SeoTitle = "máy ảnh"
                         },
                         new
                         {
                             Id = 2,
                             CategoryId = 1,
                             LanguageId = "en",
-                            Name = "Men Shirt",
-                            SeoAlias = "men-shirt",
-                            SeoDescription = "The shirt products for men",
-                            SeoTitle = "The shirt products for men"
+                            Name = "camera",
+                            SeoAlias = "camera",
+                            SeoDescription = "camera",
+                            SeoTitle = "camera"
                         },
                         new
                         {
                             Id = 3,
                             CategoryId = 2,
                             LanguageId = "vi",
-                            Name = "Áo nữ",
-                            SeoAlias = "ao-nu",
-                            SeoDescription = "Sản phẩm áo thời trang nữ",
-                            SeoTitle = "Sản phẩm áo thời trang women"
+                            Name = "thẻ nhớ",
+                            SeoAlias = "the-nho",
+                            SeoDescription = "thẻ nhớ",
+                            SeoTitle = "thẻ nhớ"
                         },
                         new
                         {
                             Id = 4,
                             CategoryId = 2,
                             LanguageId = "en",
-                            Name = "Women Shirt",
-                            SeoAlias = "women-shirt",
-                            SeoDescription = "The shirt products for women",
-                            SeoTitle = "The shirt products for women"
+                            Name = "memory-card",
+                            SeoAlias = "memory-card",
+                            SeoDescription = "memory-card",
+                            SeoTitle = "memory-card"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 3,
+                            LanguageId = "vi",
+                            Name = "giầy nữ",
+                            SeoAlias = "giay-nu",
+                            SeoDescription = "giầy nữ",
+                            SeoTitle = "giầy nữ"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 3,
+                            LanguageId = "en",
+                            Name = "boots",
+                            SeoAlias = "boots",
+                            SeoDescription = "boots",
+                            SeoTitle = "boots"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryId = 4,
+                            LanguageId = "vi",
+                            Name = "máy đọc sách",
+                            SeoAlias = "may-doc-sach",
+                            SeoDescription = "máy đọc sách",
+                            SeoTitle = "máy đọc sách"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CategoryId = 4,
+                            LanguageId = "en",
+                            Name = "e-book reader",
+                            SeoAlias = "e-book-reader",
+                            SeoDescription = "e-book reader",
+                            SeoTitle = "e-book reader"
                         });
                 });
 
@@ -641,7 +695,169 @@ namespace eShopSolution.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2021, 9, 8, 16, 33, 0, 385, DateTimeKind.Local).AddTicks(7204),
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 733, DateTimeKind.Local).AddTicks(1027),
+                            OriginalPrice = 100000m,
+                            Price = 200000m,
+                            Stock = 0,
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 733, DateTimeKind.Local).AddTicks(7592),
+                            OriginalPrice = 100000m,
+                            Price = 200000m,
+                            Stock = 0,
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 733, DateTimeKind.Local).AddTicks(7613),
+                            OriginalPrice = 100000m,
+                            Price = 200000m,
+                            Stock = 0,
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 733, DateTimeKind.Local).AddTicks(7617),
+                            OriginalPrice = 100000m,
+                            Price = 200000m,
+                            Stock = 0,
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 733, DateTimeKind.Local).AddTicks(7619),
+                            OriginalPrice = 100000m,
+                            Price = 200000m,
+                            Stock = 0,
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 733, DateTimeKind.Local).AddTicks(7622),
+                            OriginalPrice = 100000m,
+                            Price = 200000m,
+                            Stock = 0,
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 7,
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 733, DateTimeKind.Local).AddTicks(7624),
+                            OriginalPrice = 100000m,
+                            Price = 200000m,
+                            Stock = 0,
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 8,
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 733, DateTimeKind.Local).AddTicks(7626),
+                            OriginalPrice = 100000m,
+                            Price = 200000m,
+                            Stock = 0,
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 9,
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 733, DateTimeKind.Local).AddTicks(7628),
+                            OriginalPrice = 100000m,
+                            Price = 200000m,
+                            Stock = 0,
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 10,
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 733, DateTimeKind.Local).AddTicks(7631),
+                            OriginalPrice = 100000m,
+                            Price = 200000m,
+                            Stock = 0,
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 11,
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 733, DateTimeKind.Local).AddTicks(7634),
+                            OriginalPrice = 100000m,
+                            Price = 200000m,
+                            Stock = 0,
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 12,
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 733, DateTimeKind.Local).AddTicks(7636),
+                            OriginalPrice = 100000m,
+                            Price = 200000m,
+                            Stock = 0,
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 13,
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 733, DateTimeKind.Local).AddTicks(7638),
+                            OriginalPrice = 100000m,
+                            Price = 200000m,
+                            Stock = 0,
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 14,
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 733, DateTimeKind.Local).AddTicks(7640),
+                            OriginalPrice = 100000m,
+                            Price = 200000m,
+                            Stock = 0,
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 15,
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 733, DateTimeKind.Local).AddTicks(7663),
+                            OriginalPrice = 100000m,
+                            Price = 200000m,
+                            Stock = 0,
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 16,
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 733, DateTimeKind.Local).AddTicks(7664),
+                            OriginalPrice = 100000m,
+                            Price = 200000m,
+                            Stock = 0,
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 17,
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 733, DateTimeKind.Local).AddTicks(7666),
+                            OriginalPrice = 100000m,
+                            Price = 200000m,
+                            Stock = 0,
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 18,
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 733, DateTimeKind.Local).AddTicks(7668),
+                            OriginalPrice = 100000m,
+                            Price = 200000m,
+                            Stock = 0,
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 19,
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 733, DateTimeKind.Local).AddTicks(7670),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,
@@ -687,6 +903,217 @@ namespace eShopSolution.Data.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Caption = "",
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 734, DateTimeKind.Local).AddTicks(4964),
+                            FileSize = 0L,
+                            ImagePath = "/themes/images/products/1.jpg",
+                            IsDefault = true,
+                            ProductId = 1,
+                            SortOrder = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Caption = "",
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 734, DateTimeKind.Local).AddTicks(5723),
+                            FileSize = 0L,
+                            ImagePath = "/themes/images/products/2.jpg",
+                            IsDefault = true,
+                            ProductId = 2,
+                            SortOrder = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Caption = "",
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 734, DateTimeKind.Local).AddTicks(5731),
+                            FileSize = 0L,
+                            ImagePath = "/themes/images/products/3.jpg",
+                            IsDefault = true,
+                            ProductId = 3,
+                            SortOrder = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Caption = "",
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 734, DateTimeKind.Local).AddTicks(5733),
+                            FileSize = 0L,
+                            ImagePath = "/themes/images/products/4.jpg",
+                            IsDefault = true,
+                            ProductId = 4,
+                            SortOrder = 0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Caption = "",
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 734, DateTimeKind.Local).AddTicks(5736),
+                            FileSize = 0L,
+                            ImagePath = "/themes/images/products/5.jpg",
+                            IsDefault = true,
+                            ProductId = 5,
+                            SortOrder = 0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Caption = "",
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 734, DateTimeKind.Local).AddTicks(5738),
+                            FileSize = 0L,
+                            ImagePath = "/themes/images/products/6.jpg",
+                            IsDefault = true,
+                            ProductId = 6,
+                            SortOrder = 0
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Caption = "",
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 734, DateTimeKind.Local).AddTicks(5741),
+                            FileSize = 0L,
+                            ImagePath = "/themes/images/products/7.jpg",
+                            IsDefault = true,
+                            ProductId = 7,
+                            SortOrder = 0
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Caption = "",
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 734, DateTimeKind.Local).AddTicks(5743),
+                            FileSize = 0L,
+                            ImagePath = "/themes/images/products/8.jpg",
+                            IsDefault = true,
+                            ProductId = 8,
+                            SortOrder = 0
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Caption = "",
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 734, DateTimeKind.Local).AddTicks(5746),
+                            FileSize = 0L,
+                            ImagePath = "/themes/images/products/9.jpg",
+                            IsDefault = true,
+                            ProductId = 9,
+                            SortOrder = 0
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Caption = "",
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 734, DateTimeKind.Local).AddTicks(5748),
+                            FileSize = 0L,
+                            ImagePath = "/themes/images/products/10.jpg",
+                            IsDefault = true,
+                            ProductId = 10,
+                            SortOrder = 0
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Caption = "",
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 734, DateTimeKind.Local).AddTicks(5750),
+                            FileSize = 0L,
+                            ImagePath = "/themes/images/products/11.jpg",
+                            IsDefault = true,
+                            ProductId = 11,
+                            SortOrder = 0
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Caption = "",
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 734, DateTimeKind.Local).AddTicks(5752),
+                            FileSize = 0L,
+                            ImagePath = "/themes/images/products/12.jpg",
+                            IsDefault = true,
+                            ProductId = 12,
+                            SortOrder = 0
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Caption = "",
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 734, DateTimeKind.Local).AddTicks(5755),
+                            FileSize = 0L,
+                            ImagePath = "/themes/images/products/13.jpg",
+                            IsDefault = true,
+                            ProductId = 13,
+                            SortOrder = 0
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Caption = "",
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 734, DateTimeKind.Local).AddTicks(5757),
+                            FileSize = 0L,
+                            ImagePath = "/themes/images/products/b1.jpg",
+                            IsDefault = true,
+                            ProductId = 14,
+                            SortOrder = 0
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Caption = "",
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 734, DateTimeKind.Local).AddTicks(5759),
+                            FileSize = 0L,
+                            ImagePath = "/themes/images/products/b2.jpg",
+                            IsDefault = true,
+                            ProductId = 15,
+                            SortOrder = 0
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Caption = "",
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 734, DateTimeKind.Local).AddTicks(5761),
+                            FileSize = 0L,
+                            ImagePath = "/themes/images/products/b3.jpg",
+                            IsDefault = true,
+                            ProductId = 16,
+                            SortOrder = 0
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Caption = "",
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 734, DateTimeKind.Local).AddTicks(5764),
+                            FileSize = 0L,
+                            ImagePath = "/themes/images/products/b4.jpg",
+                            IsDefault = true,
+                            ProductId = 17,
+                            SortOrder = 0
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Caption = "",
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 734, DateTimeKind.Local).AddTicks(5766),
+                            FileSize = 0L,
+                            ImagePath = "/themes/images/products/kindle.png",
+                            IsDefault = true,
+                            ProductId = 18,
+                            SortOrder = 0
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Caption = "",
+                            DateCreated = new DateTime(2021, 9, 9, 6, 42, 18, 734, DateTimeKind.Local).AddTicks(5769),
+                            FileSize = 0L,
+                            ImagePath = "/themes/images/products/panasonic.jpg",
+                            IsDefault = true,
+                            ProductId = 19,
+                            SortOrder = 0
+                        });
                 });
 
             modelBuilder.Entity("eShopSolution.Data.Entities.ProductInCategory", b =>
@@ -707,6 +1134,96 @@ namespace eShopSolution.Data.Migrations
                         new
                         {
                             ProductId = 1,
+                            CategoryId = 1
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            CategoryId = 1
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            CategoryId = 1
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            CategoryId = 1
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            CategoryId = 1
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            CategoryId = 2
+                        },
+                        new
+                        {
+                            ProductId = 7,
+                            CategoryId = 2
+                        },
+                        new
+                        {
+                            ProductId = 8,
+                            CategoryId = 2
+                        },
+                        new
+                        {
+                            ProductId = 9,
+                            CategoryId = 1
+                        },
+                        new
+                        {
+                            ProductId = 10,
+                            CategoryId = 2
+                        },
+                        new
+                        {
+                            ProductId = 11,
+                            CategoryId = 1
+                        },
+                        new
+                        {
+                            ProductId = 12,
+                            CategoryId = 2
+                        },
+                        new
+                        {
+                            ProductId = 13,
+                            CategoryId = 1
+                        },
+                        new
+                        {
+                            ProductId = 14,
+                            CategoryId = 3
+                        },
+                        new
+                        {
+                            ProductId = 15,
+                            CategoryId = 3
+                        },
+                        new
+                        {
+                            ProductId = 16,
+                            CategoryId = 3
+                        },
+                        new
+                        {
+                            ProductId = 17,
+                            CategoryId = 3
+                        },
+                        new
+                        {
+                            ProductId = 18,
+                            CategoryId = 4
+                        },
+                        new
+                        {
+                            ProductId = 19,
                             CategoryId = 1
                         });
                 });
@@ -764,26 +1281,458 @@ namespace eShopSolution.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "Áo sơ mi nam trắng Việt Tiến",
-                            Details = "Áo sơ mi nam trắng Việt Tiến",
+                            Description = "máy ảnh 1",
+                            Details = "máy ảnh 1",
                             LanguageId = "vi",
-                            Name = "Áo sơ mi nam trắng Việt Tiến",
+                            Name = "máy ảnh 1",
                             ProductId = 1,
-                            SeoAlias = "ao-so-mi-nam-trang-viet-tien",
-                            SeoDescription = "Áo sơ mi nam trắng Việt Tiến",
-                            SeoTitle = "Áo sơ mi nam trắng Việt Tiến"
+                            SeoAlias = "may anh",
+                            SeoDescription = "máy ảnh 1",
+                            SeoTitle = "máy ảnh 1"
                         },
                         new
                         {
                             Id = 2,
-                            Description = "Viet Tien Men T-Shirt",
-                            Details = "Viet Tien Men T-Shirt",
+                            Description = "camera 1",
+                            Details = "camera 1",
                             LanguageId = "en",
-                            Name = "Viet Tien Men T-Shirt",
+                            Name = "camera 1",
                             ProductId = 1,
-                            SeoAlias = "viet-tien-men-t-shirt",
-                            SeoDescription = "Viet Tien Men T-Shirt",
-                            SeoTitle = "Viet Tien Men T-Shirt"
+                            SeoAlias = "camera 1",
+                            SeoDescription = "camera 1",
+                            SeoTitle = "camera 1"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "máy ảnh 2",
+                            Details = "máy ảnh 2",
+                            LanguageId = "vi",
+                            Name = "máy ảnh 2",
+                            ProductId = 2,
+                            SeoAlias = "may anh",
+                            SeoDescription = "máy ảnh 2",
+                            SeoTitle = "máy ảnh 2"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "camera 2",
+                            Details = "camera 2",
+                            LanguageId = "en",
+                            Name = "camera 2",
+                            ProductId = 2,
+                            SeoAlias = "camera 2",
+                            SeoDescription = "camera 2",
+                            SeoTitle = "camera 2"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "máy ảnh 3",
+                            Details = "máy ảnh 3",
+                            LanguageId = "vi",
+                            Name = "máy ảnh 3",
+                            ProductId = 3,
+                            SeoAlias = "may anh",
+                            SeoDescription = "máy ảnh 3",
+                            SeoTitle = "máy ảnh 3"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "camera 3",
+                            Details = "camera 3",
+                            LanguageId = "en",
+                            Name = "camera 3",
+                            ProductId = 3,
+                            SeoAlias = "camera 3",
+                            SeoDescription = "camera 3",
+                            SeoTitle = "camera 3"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "máy ảnh 4",
+                            Details = "máy ảnh 4",
+                            LanguageId = "vi",
+                            Name = "máy ảnh 4",
+                            ProductId = 4,
+                            SeoAlias = "may anh",
+                            SeoDescription = "máy ảnh 4",
+                            SeoTitle = "máy ảnh 4"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Description = "camera 4",
+                            Details = "camera 4",
+                            LanguageId = "en",
+                            Name = "camera 4",
+                            ProductId = 4,
+                            SeoAlias = "camera 4",
+                            SeoDescription = "camera 4",
+                            SeoTitle = "camera 4"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Description = "máy ảnh 5",
+                            Details = "máy ảnh 5",
+                            LanguageId = "vi",
+                            Name = "máy ảnh 5",
+                            ProductId = 5,
+                            SeoAlias = "may anh",
+                            SeoDescription = "máy ảnh 5",
+                            SeoTitle = "máy ảnh 5"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Description = "camera 5",
+                            Details = "camera 5",
+                            LanguageId = "en",
+                            Name = "camera 5",
+                            ProductId = 5,
+                            SeoAlias = "camera 5",
+                            SeoDescription = "camera 5",
+                            SeoTitle = "camera 5"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Description = "thẻ nhớ 1",
+                            Details = "thẻ nhớ 1",
+                            LanguageId = "vi",
+                            Name = "thẻ nhớ 1",
+                            ProductId = 6,
+                            SeoAlias = "the nho 1",
+                            SeoDescription = "thẻ nhớ 1",
+                            SeoTitle = "thẻ nhớ 1"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Description = "memory card 1",
+                            Details = "memory card 1",
+                            LanguageId = "en",
+                            Name = "memory card 1",
+                            ProductId = 6,
+                            SeoAlias = "memory card 1",
+                            SeoDescription = "memory card 1",
+                            SeoTitle = "memory card 1"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Description = "thẻ nhớ 2",
+                            Details = "thẻ nhớ 2",
+                            LanguageId = "vi",
+                            Name = "thẻ nhớ 2",
+                            ProductId = 7,
+                            SeoAlias = "the nho 2",
+                            SeoDescription = "thẻ nhớ 2",
+                            SeoTitle = "thẻ nhớ 2"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Description = "memory card 2",
+                            Details = "memory card 2",
+                            LanguageId = "en",
+                            Name = "memory card 2",
+                            ProductId = 7,
+                            SeoAlias = "memory card 2",
+                            SeoDescription = "memory card 2",
+                            SeoTitle = "memory card 2"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Description = "thẻ nhớ 3",
+                            Details = "thẻ nhớ 3",
+                            LanguageId = "vi",
+                            Name = "thẻ nhớ 3",
+                            ProductId = 8,
+                            SeoAlias = "the nho 3",
+                            SeoDescription = "thẻ nhớ 3",
+                            SeoTitle = "thẻ nhớ 3"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Description = "memory card 3",
+                            Details = "memory card 3",
+                            LanguageId = "en",
+                            Name = "memory card 3",
+                            ProductId = 8,
+                            SeoAlias = "memory card 3",
+                            SeoDescription = "memory card 3",
+                            SeoTitle = "memory card 3"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Description = "bộ phụ kiện máy ảnh 1",
+                            Details = "bộ phụ kiện máy ảnh 1",
+                            LanguageId = "vi",
+                            Name = "bộ phụ kiện máy ảnh 1",
+                            ProductId = 9,
+                            SeoAlias = "bo phu kien may anh 1",
+                            SeoDescription = "bộ phụ kiện máy ảnh 1",
+                            SeoTitle = "bộ phụ kiện máy ảnh 1"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Description = "camera combo 1",
+                            Details = "camera combo 1",
+                            LanguageId = "en",
+                            Name = "camera combo 1",
+                            ProductId = 9,
+                            SeoAlias = "camera combo 1",
+                            SeoDescription = "camera combo 1",
+                            SeoTitle = "camera combo 1"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Description = "thẻ nhớ 4",
+                            Details = "thẻ nhớ 4",
+                            LanguageId = "vi",
+                            Name = "thẻ nhớ 4",
+                            ProductId = 10,
+                            SeoAlias = "the nho 4",
+                            SeoDescription = "thẻ nhớ 4",
+                            SeoTitle = "thẻ nhớ 4"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Description = "memory card 4",
+                            Details = "memory card 4",
+                            LanguageId = "en",
+                            Name = "memory card 4",
+                            ProductId = 10,
+                            SeoAlias = "memory card 4",
+                            SeoDescription = "memory card 4",
+                            SeoTitle = "memory card 4"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Description = "máy ảnh 6",
+                            Details = "máy ảnh 6",
+                            LanguageId = "vi",
+                            Name = "máy ảnh 6",
+                            ProductId = 11,
+                            SeoAlias = "may anh",
+                            SeoDescription = "máy ảnh 6",
+                            SeoTitle = "máy ảnh 6"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Description = "camera 6",
+                            Details = "camera 6",
+                            LanguageId = "en",
+                            Name = "camera 6",
+                            ProductId = 11,
+                            SeoAlias = "camera 6",
+                            SeoDescription = "camera 6",
+                            SeoTitle = "camera 6"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Description = "thẻ nhớ 5",
+                            Details = "thẻ nhớ 5",
+                            LanguageId = "vi",
+                            Name = "thẻ nhớ 5",
+                            ProductId = 12,
+                            SeoAlias = "the nho 5",
+                            SeoDescription = "thẻ nhớ 5",
+                            SeoTitle = "thẻ nhớ 5"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Description = "memory card 5",
+                            Details = "memory card 5",
+                            LanguageId = "en",
+                            Name = "memory card 5",
+                            ProductId = 12,
+                            SeoAlias = "memory card 5",
+                            SeoDescription = "memory card 5",
+                            SeoTitle = "memory card 5"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Description = "máy ảnh 7",
+                            Details = "máy ảnh 7",
+                            LanguageId = "vi",
+                            Name = "máy ảnh 7",
+                            ProductId = 13,
+                            SeoAlias = "may anh",
+                            SeoDescription = "máy ảnh 7",
+                            SeoTitle = "máy ảnh 7"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Description = "camera 7",
+                            Details = "camera 7",
+                            LanguageId = "en",
+                            Name = "camera 7",
+                            ProductId = 13,
+                            SeoAlias = "camera 7",
+                            SeoDescription = "camera 7",
+                            SeoTitle = "camera 7"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Description = "giầy nữ 1",
+                            Details = "giầy nữ 1",
+                            LanguageId = "vi",
+                            Name = "giầy nữ 1",
+                            ProductId = 14,
+                            SeoAlias = "giay nu 1",
+                            SeoDescription = "giầy nữ 1",
+                            SeoTitle = "giầy nữ 1"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Description = "boots 1",
+                            Details = "boots 1",
+                            LanguageId = "en",
+                            Name = "boots 1",
+                            ProductId = 14,
+                            SeoAlias = "boots 1",
+                            SeoDescription = "boots 1",
+                            SeoTitle = "boots 1"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Description = "giầy nữ 2",
+                            Details = "giầy nữ 2",
+                            LanguageId = "vi",
+                            Name = "giầy nữ 2",
+                            ProductId = 15,
+                            SeoAlias = "giay nu 2",
+                            SeoDescription = "giầy nữ 2",
+                            SeoTitle = "giầy nữ 2"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Description = "boots 2",
+                            Details = "boots 2",
+                            LanguageId = "en",
+                            Name = "boots 2",
+                            ProductId = 15,
+                            SeoAlias = "boots 2",
+                            SeoDescription = "boots 2",
+                            SeoTitle = "boots 2"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Description = "giầy nữ 3",
+                            Details = "giầy nữ 3",
+                            LanguageId = "vi",
+                            Name = "giầy nữ 3",
+                            ProductId = 16,
+                            SeoAlias = "giay nu 3",
+                            SeoDescription = "giầy nữ 3",
+                            SeoTitle = "giầy nữ 3"
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Description = "boots 3",
+                            Details = "boots 3",
+                            LanguageId = "en",
+                            Name = "boots 3",
+                            ProductId = 16,
+                            SeoAlias = "boots 3",
+                            SeoDescription = "boots 3",
+                            SeoTitle = "boots 3"
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Description = "giầy nữ 4",
+                            Details = "giầy nữ 4",
+                            LanguageId = "vi",
+                            Name = "giầy nữ 4",
+                            ProductId = 17,
+                            SeoAlias = "giay nu 4",
+                            SeoDescription = "giầy nữ 4",
+                            SeoTitle = "giầy nữ 4"
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Description = "boots 4",
+                            Details = "boots 4",
+                            LanguageId = "en",
+                            Name = "boots 4",
+                            ProductId = 17,
+                            SeoAlias = "boots 4",
+                            SeoDescription = "boots 4",
+                            SeoTitle = "boots 4"
+                        },
+                        new
+                        {
+                            Id = 35,
+                            Description = "máy đọc sách 1",
+                            Details = "máy đọc sách 1",
+                            LanguageId = "vi",
+                            Name = "máy đọc sách 1",
+                            ProductId = 18,
+                            SeoAlias = "may doc sach 1",
+                            SeoDescription = "máy đọc sách 1",
+                            SeoTitle = "máy đọc sách 1"
+                        },
+                        new
+                        {
+                            Id = 36,
+                            Description = "kindle 1",
+                            Details = "kindle 1",
+                            LanguageId = "en",
+                            Name = "kindle 1",
+                            ProductId = 18,
+                            SeoAlias = "kindle 1",
+                            SeoDescription = "kindle 1",
+                            SeoTitle = "kindle 1"
+                        },
+                        new
+                        {
+                            Id = 37,
+                            Description = "máy ảnh 8",
+                            Details = "máy ảnh 8",
+                            LanguageId = "vi",
+                            Name = "máy ảnh 8",
+                            ProductId = 19,
+                            SeoAlias = "may anh 8",
+                            SeoDescription = "máy ảnh 8",
+                            SeoTitle = "máy ảnh 8"
+                        },
+                        new
+                        {
+                            Id = 38,
+                            Description = "camera 8",
+                            Details = "camera 8",
+                            LanguageId = "en",
+                            Name = "camera 8",
+                            ProductId = 19,
+                            SeoAlias = "camera 8",
+                            SeoDescription = "camera 8",
+                            SeoTitle = "camera 8"
                         });
                 });
 

@@ -9,7 +9,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -101,6 +100,18 @@ namespace eShopSolution.ApiIntegration
         {
             var languageId = _httpContextAccessor.HttpContext.Session.GetString(SystemConstants.AppSettings.DefaultLanguageId);
             return await GetAsync<ProductViewModel>($"/api/products/{id}/{languageId}");
+        }
+
+        public async Task<List<ProductViewModel>> GetFeaturedProducts(string languageId, int take)
+        {
+            var data = await GetAsync<List<ProductViewModel>>($"/api/products/featured/{languageId}/{take}");
+            return data;
+        }
+
+        public async Task<List<ProductViewModel>> GetLatestProducts(string languageId, int take)
+        {
+            var data = await GetAsync<List<ProductViewModel>>($"/api/products/latest/{languageId}/{take}");
+            return data;
         }
     }
 }
