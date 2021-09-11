@@ -71,6 +71,22 @@ namespace eShopSolution.BackendApi.Controllers
             return Ok(result);
         }
 
+        //PUT: http://localhost/api/users/id
+        [HttpPut("{id}/roles")]
+        public async Task<IActionResult> RoleAssign(Guid id, [FromBody] RoleAssignRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _userService.RoleAssign(id, request);
+            if (!result.IsSucceeded)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
         //http://localhost:port/api/users/paging?pageIndex=1&pageSize=10&Keyword=
         [HttpGet("paging")]
         public async Task<IActionResult> GetUserPaging([FromQuery] GetUserPagingRequest request)
@@ -87,6 +103,15 @@ namespace eShopSolution.BackendApi.Controllers
             var user = await _userService.GetUserById(id);
 
             return Ok(user);
+        }
+
+        //DELETE: http://localhost/api/users/id
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var result = await _userService.Delete(id);
+
+            return Ok(result);
         }
     }
 }

@@ -1,6 +1,10 @@
+using eShopSolution.App.Catalog.Categories;
 using eShopSolution.App.Catalog.Products;
 using eShopSolution.App.Common;
+using eShopSolution.App.System.Languages;
+using eShopSolution.App.System.Roles;
 using eShopSolution.App.System.Users;
+using eShopSolution.App.Utilities.Slides;
 using eShopSolution.Data.EF;
 using eShopSolution.Data.Entities;
 using eShopSolution.Utilities.Constants;
@@ -49,6 +53,10 @@ namespace eShopSolution.BackendApi
             services.AddTransient<IStorageService, FileStorageService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<ILanguageService, LanguageService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<ISlideService, SlideService>();
 
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();

@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace eShopSolution.ViewModels.Catalog.ProductImages
 {
@@ -21,7 +16,5 @@ namespace eShopSolution.ViewModels.Catalog.ProductImages
         public int SortOrder { get; set; }
 
         public long FileSize { get; set; }
-
-
     }
 }

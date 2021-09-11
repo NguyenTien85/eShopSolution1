@@ -7,17 +7,53 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Scripts{
+    <script>
+        setTimeout(function () {
+            $('#msgAlert').fadeOut('slow');
+        }, 1000);
+    </script>
+}
+
 <div class="container-fluid px-4">
     <h1 class="mt-4">User List</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-        <li class="breadcrumb-item active">Tables</li>
+        <li class="breadcrumb-item"><a href="/">MainPage</a></li>
+        <li class="breadcrumb-item active">User List</li>
     </ol>
     <div class="card mb-4">
         <div class="card-header">
-            <a class="btn btn-success" asp-action="Create" asp-controller="User">New User</a>
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <a class="btn btn-success" asp-action="Create" asp-controller="User">New User</a>
+                </div>
+                @*<div class="col-md-6 col-xs-12">
+                        <form asp-action="Index" method="get">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
+                                </div>
+                                <div class="cold-md-3">
+                                    <button type="submit" class="btn btn-primary">Tìm</button>
+                                    <button type="button" onclick="window.location.href='/User/Index'" class="btn btn-dark">Reset</button>
+                                </div>
+                            </div>
+
+                            <input type="text" name="Keyword" class="form-control" />
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+                    </div>*@
+            </div>
         </div>
         <div class="card-body">
+            @if (@ViewBag.SuccessMessage != null)
+            {
+                <div class="row">
+                    <div id="msgAlert" class="alert alert-success" role="alert">
+                        @ViewBag.SuccessMessage
+                    </div>
+                </div>
+            }
             <table id="datatablesSimple">
                 <thead>
                     <tr>
@@ -59,13 +95,14 @@
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                                @Html.ActionLink("RoleAssign", "RoleAssign", new { id = item.Id })
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
         </div>
-        @await Component.InvokeAsync("Pager", Model)
+        @*@await Component.InvokeAsync("Pager", Model)*@
     </div>
 </div>

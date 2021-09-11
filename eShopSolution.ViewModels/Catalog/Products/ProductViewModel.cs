@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eShopSolution.ViewModels.Catalog.Products
 {
@@ -23,5 +20,8 @@ namespace eShopSolution.ViewModels.Catalog.Products
 
         public string SeoAlias { get; set; }
         public string LanguageId { set; get; }
+        public bool? IsFeatured { get; set; }
+        public string ThubnailImage { get; set; }
+        public List<string> Categories { get; set; } = new List<string>();//store all categoryIds of current product
     }
 }

@@ -1,11 +1,6 @@
 ﻿using eShopSolution.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eShopSolution.Data.Configurations
 {
@@ -24,7 +19,6 @@ namespace eShopSolution.Data.Configurations
             builder.Property(x => x.LanguageId).IsUnicode(false).IsRequired().HasMaxLength(5);
             builder.HasOne(x => x.Language).WithMany(x => x.CategoryTranslations).HasForeignKey(x => x.LanguageId);
             builder.HasOne(x => x.Category).WithMany(x => x.CategoryTranslations).HasForeignKey(x => x.CategoryId);
-
         }
     }
 }

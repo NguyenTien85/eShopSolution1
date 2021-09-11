@@ -1,13 +1,11 @@
-﻿using eShopSolution.ViewModels.Catalog.ProductImages;
+﻿using eShopSolution.ViewModels.Catalog.Categories;
+using eShopSolution.ViewModels.Catalog.Categories.Request;
+using eShopSolution.ViewModels.Catalog.ProductImages;
 using eShopSolution.ViewModels.Catalog.ProductImages.Request;
 using eShopSolution.ViewModels.Catalog.Products;
 using eShopSolution.ViewModels.Catalog.Products.Request;
 using eShopSolution.ViewModels.Common;
-using Microsoft.AspNetCore.Http;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace eShopSolution.App.Catalog.Products
@@ -22,11 +20,15 @@ namespace eShopSolution.App.Catalog.Products
 
         Task<bool> UpdateStock(int productId, int addedQuantity);
 
-        Task<int> Delete(int productId);
+        Task<ApiResult<bool>> Delete(int productId);
 
         Task AddViewCount(int productId);
 
         Task<ProductViewModel> GetById(int productId, string languageId);
+
+        Task<CategoryViewModel> GetCatalogOfProduct(int productId, string languageId);
+
+        Task<PagedResult<ProductViewModel>> GetAllProductsOfCatalog(GetManageProductPagingRequest request);
 
         Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request);
 
@@ -41,5 +43,11 @@ namespace eShopSolution.App.Catalog.Products
         Task<List<ProductImageViewModel>> GetListImages(int productId);
 
         Task<PagedResult<ProductViewModel>> GetAllByCategoryId(string languageId, GetPublicProductPagingRequest request);
+
+        Task<List<ProductViewModel>> GetFeaturedProducts(string languageId, int take);
+
+        Task<List<ProductViewModel>> GetLatestProducts(string languageId, int take);
+
+        Task<ApiResult<bool>> CategoryAssign(CategoryAssignRequest request);
     }
 }

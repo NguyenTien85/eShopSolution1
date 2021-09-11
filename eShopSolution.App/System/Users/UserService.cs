@@ -1,15 +1,12 @@
 ﻿using eShopSolution.Data.Entities;
-using eShopSolution.Utilities.Exceptions;
 using eShopSolution.ViewModels.Common;
 using eShopSolution.ViewModels.System.Users;
 using eShopSolution.ViewModels.System.Users.Request;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -74,6 +71,19 @@ namespace eShopSolution.App.System.Users
             return new ApiSuccessResult<string>(new JwtSecurityTokenHandler().WriteToken(token));
         }
 
+        public async Task<ApiResult<bool>> Delete(Guid id)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user == null)
+            {
+                return new ApiErrorResult<bool>($"User with id {id} not existed");
+            }
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
+                return new ApiSuccessResult<bool>();
+            return new ApiErrorResult<bool>("Fail to delete");
+        }
+
         public async Task<ApiResult<UserViewModel>> GetUserById(Guid id)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
@@ -81,6 +91,7 @@ namespace eShopSolution.App.System.Users
             {
                 return new ApiErrorResult<UserViewModel>($"User with id {id} not existed");
             }
+            var userRoles = await _userManager.GetRolesAsync(user);
             var userViewModel = new UserViewModel()
             {
                 UserName = user.UserName,
@@ -89,8 +100,10 @@ namespace eShopSolution.App.System.Users
                 Id = id,
                 LastName = user.LastName,
                 PhoneNumber = user.PhoneNumber,
-                Dob = user.DoB
+                Dob = user.DoB,
+                Roles = userRoles.ToList()
             };
+
             return new ApiSuccessResult<UserViewModel>(userViewModel);
         }
 
@@ -158,6 +171,29 @@ namespace eShopSolution.App.System.Users
                 return new ApiSuccessResult<bool>();
             }
             return new ApiErrorResult<bool>("Register Fail");
+        }
+
+        public async Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user == null)
+            {
+                return new ApiErrorResult<bool>($"User with id {id} not existed");
+            }
+
+            var removedRoles = request.Roles.Where(x => x.Selected == false).Select(x => x.Name);
+            await _userManager.RemoveFromRolesAsync(user, removedRoles);
+
+            var addedRoles = request.Roles.Where(x => x.Selected == true).Select(x => x.Name);
+            foreach (var role in addedRoles)
+            {
+                if (await _userManager.IsInRoleAsync(user, role) == false)
+                {
+                    await _userManager.AddToRoleAsync(user, role);
+                }
+            }
+
+            return new ApiSuccessResult<bool>();
         }
 
         public async Task<ApiResult<bool>> Update(Guid id, UserUpdateRequest request)

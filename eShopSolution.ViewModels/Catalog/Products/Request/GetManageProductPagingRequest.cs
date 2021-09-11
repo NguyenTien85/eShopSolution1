@@ -1,9 +1,4 @@
 ﻿using eShopSolution.ViewModels.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eShopSolution.ViewModels.Catalog.Products.Request
 {
@@ -11,6 +6,8 @@ namespace eShopSolution.ViewModels.Catalog.Products.Request
     {
         public string Keyword { get; set; }
 
-        public List<int> CategoryIds { get; set; }
+        public string LanguageId { get; set; }
+
+        public int? CategoryId { get; set; }
     }
 }

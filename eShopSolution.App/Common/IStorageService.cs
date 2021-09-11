@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Threading.Tasks;
 
 namespace eShopSolution.App.Common
@@ -11,7 +7,7 @@ namespace eShopSolution.App.Common
     {
         string GetFileUrl(string fileName);
 
-        Task SaveFileAsync(Stream mediaBinaryStream, string fileName);
+        Task<string> SaveFileAsync(Stream mediaBinaryStream, string fileName);
 
         Task DeleteFileAsync(string fileName);
     }
