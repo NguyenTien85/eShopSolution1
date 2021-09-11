@@ -7,5 +7,7 @@ namespace eShopSolution.App.Catalog.Categories
     public interface ICategoryService
     {
         Task<List<CategoryViewModel>> GetAll(string languageId);
+
+        Task<CategoryViewModel> GetById(int categoryId, string languageId);
     }
 }

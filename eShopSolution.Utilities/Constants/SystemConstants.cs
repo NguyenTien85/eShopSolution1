@@ -14,7 +14,7 @@
         public class ProductSettings
         {
             public const int FeaturedProductTakeOut = 10;
-            public const int LatestProductTakeOut = 9;
+            public const int LatestProductTakeOut = 6;
         }
     }
 }

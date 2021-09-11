@@ -1,4 +1,5 @@
 ﻿using eShopSolution.ApiIntegration;
+using eShopSolution.Utilities.Constants;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -25,8 +26,8 @@ namespace eShopSolution.AdminApp.Controllers
         {
             //set authenticated user to be able to request backend Api
             var session = HttpContext.Session.GetString("Token");
-
-            var categories = await _categoryApiClient.GetAll();
+            var languageId = HttpContext.Session.GetString(SystemConstants.AppSettings.DefaultLanguageId);
+            var categories = await _categoryApiClient.GetAll(languageId);
             //ViewBag.Keyword = keyword;
 
             //var categories = await _productApiClient.GetAllCategory()

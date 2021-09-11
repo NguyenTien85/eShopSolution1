@@ -17,10 +17,14 @@ namespace eShopSolution.ApiIntegration
         {
         }
 
-        public async Task<List<CategoryViewModel>> GetAll()
+        public async Task<List<CategoryViewModel>> GetAll(string languageId)
         {
-            var languageId = _httpContextAccessor.HttpContext.Session.GetString(SystemConstants.AppSettings.DefaultLanguageId);
             return await GetAsync<List<CategoryViewModel>>($"/api/categories?languageId={languageId}");
+        }
+
+        public async Task<CategoryViewModel> GetById(int id, string languageId)
+        {
+            return await GetAsync<CategoryViewModel>($"/api/categories/{id}/{languageId}");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using eShopSolution.ViewModels.Catalog.Categories.Request;
+﻿using eShopSolution.ViewModels.Catalog.Categories;
+using eShopSolution.ViewModels.Catalog.Categories.Request;
 using eShopSolution.ViewModels.Catalog.ProductImages;
 using eShopSolution.ViewModels.Catalog.ProductImages.Request;
 using eShopSolution.ViewModels.Catalog.Products;
@@ -19,11 +20,15 @@ namespace eShopSolution.App.Catalog.Products
 
         Task<bool> UpdateStock(int productId, int addedQuantity);
 
-        Task<int> Delete(int productId);
+        Task<ApiResult<bool>> Delete(int productId);
 
         Task AddViewCount(int productId);
 
         Task<ProductViewModel> GetById(int productId, string languageId);
+
+        Task<CategoryViewModel> GetCatalogOfProduct(int productId, string languageId);
+
+        Task<PagedResult<ProductViewModel>> GetAllProductsOfCatalog(GetManageProductPagingRequest request);
 
         Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request);
 

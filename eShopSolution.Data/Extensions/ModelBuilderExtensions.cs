@@ -24,7 +24,7 @@ namespace eShopSolution.Data.Extensions
                 {
                     Id = 1,
                     IsShowOnHome = true,
-                    ParentId = null,
+                    ParentId = 5,
                     SortOrder = 1,
                     Status = Status.Active,
                 },
@@ -32,7 +32,7 @@ namespace eShopSolution.Data.Extensions
                  {
                      Id = 2,
                      IsShowOnHome = true,
-                     ParentId = null,
+                     ParentId = 5,
                      SortOrder = 2,
                      Status = Status.Active
                  },
@@ -40,7 +40,7 @@ namespace eShopSolution.Data.Extensions
                  {
                      Id = 3,
                      IsShowOnHome = true,
-                     ParentId = null,
+                     ParentId = 9,
                      SortOrder = 1,
                      Status = Status.Active,
                  },
@@ -48,7 +48,95 @@ namespace eShopSolution.Data.Extensions
                  {
                      Id = 4,
                      IsShowOnHome = true,
+                     ParentId = 5,
+                     SortOrder = 2,
+                     Status = Status.Active
+                 },
+                 new Category()
+                 {
+                     Id = 5,
+                     IsShowOnHome = true,
                      ParentId = null,
+                     SortOrder = 2,
+                     Status = Status.Active
+                 },
+                 new Category()
+                 {
+                     Id = 6,
+                     IsShowOnHome = true,
+                     ParentId = 5,
+                     SortOrder = 1,
+                     Status = Status.Active,
+                 },
+                 new Category()
+                 {
+                     Id = 7,
+                     IsShowOnHome = true,
+                     ParentId = 5,
+                     SortOrder = 2,
+                     Status = Status.Active
+                 },
+                 new Category()
+                 {
+                     Id = 8,
+                     IsShowOnHome = true,
+                     ParentId = 5,
+                     SortOrder = 1,
+                     Status = Status.Active,
+                 },
+                 new Category()
+                 {
+                     Id = 9,
+                     IsShowOnHome = true,
+                     ParentId = null,
+                     SortOrder = 2,
+                     Status = Status.Active
+                 },
+                 new Category()
+                 {
+                     Id = 10,
+                     IsShowOnHome = true,
+                     ParentId = 9,
+                     SortOrder = 2,
+                     Status = Status.Active
+                 },
+                 new Category()
+                 {
+                     Id = 11,
+                     IsShowOnHome = true,
+                     ParentId = 9,
+                     SortOrder = 1,
+                     Status = Status.Active,
+                 },
+                 new Category()
+                 {
+                     Id = 12,
+                     IsShowOnHome = true,
+                     ParentId = 9,
+                     SortOrder = 2,
+                     Status = Status.Active
+                 },
+                 new Category()
+                 {
+                     Id = 13,
+                     IsShowOnHome = true,
+                     ParentId = 9,
+                     SortOrder = 1,
+                     Status = Status.Active,
+                 },
+                 new Category()
+                 {
+                     Id = 14,
+                     IsShowOnHome = true,
+                     ParentId = 9,
+                     SortOrder = 2,
+                     Status = Status.Active
+                 },
+                 new Category()
+                 {
+                     Id = 15,
+                     IsShowOnHome = true,
+                     ParentId = 9,
                      SortOrder = 2,
                      Status = Status.Active
                  }
@@ -59,10 +147,32 @@ namespace eShopSolution.Data.Extensions
                   new CategoryTranslation() { Id = 2, CategoryId = 1, Name = "camera", LanguageId = "en", SeoAlias = "camera", SeoDescription = "camera", SeoTitle = "camera" },
                   new CategoryTranslation() { Id = 3, CategoryId = 2, Name = "thẻ nhớ", LanguageId = "vi", SeoAlias = "the-nho", SeoDescription = "thẻ nhớ", SeoTitle = "thẻ nhớ" },
                   new CategoryTranslation() { Id = 4, CategoryId = 2, Name = "memory-card", LanguageId = "en", SeoAlias = "memory-card", SeoDescription = "memory-card", SeoTitle = "memory-card" },
-                  new CategoryTranslation() { Id = 5, CategoryId = 3, Name = "giầy nữ", LanguageId = "vi", SeoAlias = "giay-nu", SeoDescription = "giầy nữ", SeoTitle = "giầy nữ" },
-                  new CategoryTranslation() { Id = 6, CategoryId = 3, Name = "boots", LanguageId = "en", SeoAlias = "boots", SeoDescription = "boots", SeoTitle = "boots" },
-                  new CategoryTranslation() { Id = 7, CategoryId = 4, Name = "máy đọc sách", LanguageId = "vi", SeoAlias = "may-doc-sach", SeoDescription = "máy đọc sách", SeoTitle = "máy đọc sách" },
-                  new CategoryTranslation() { Id = 8, CategoryId = 4, Name = "e-book reader", LanguageId = "en", SeoAlias = "e-book-reader", SeoDescription = "e-book reader", SeoTitle = "e-book reader" }
+                  new CategoryTranslation() { Id = 5, CategoryId = 3, Name = "Giày nữ", LanguageId = "vi", SeoAlias = "giay-nu", SeoDescription = "Giày nữ", SeoTitle = "Giày nữ" },
+                  new CategoryTranslation() { Id = 6, CategoryId = 3, Name = "Women's Shoes", LanguageId = "en", SeoAlias = "women-clothing", SeoDescription = "Women's Clothing", SeoTitle = "Women's Clothing" }, new CategoryTranslation() { Id = 7, CategoryId = 4, Name = "máy đọc sách", LanguageId = "vi", SeoAlias = "may-doc-sach", SeoDescription = "máy đọc sách", SeoTitle = "máy đọc sách" },
+                  new CategoryTranslation() { Id = 8, CategoryId = 4, Name = "e-book reader", LanguageId = "en", SeoAlias = "e-book-reader", SeoDescription = "e-book reader", SeoTitle = "e-book reader" },
+                  new CategoryTranslation() { Id = 9, CategoryId = 5, Name = "đồ điện tử", LanguageId = "vi", SeoAlias = "do-dien-tu", SeoDescription = "đồ điện tử", SeoTitle = "đồ điện tử" },
+                  new CategoryTranslation() { Id = 10, CategoryId = 5, Name = "electronics", LanguageId = "en", SeoAlias = "electronics", SeoDescription = "electronics", SeoTitle = "electronics" },
+                  new CategoryTranslation() { Id = 11, CategoryId = 6, Name = "Máy tính, máy tính bảng & Máy tính xách tay", LanguageId = "vi", SeoAlias = "may-tinh-may-tinh-bang-may-tinh-xach-tay", SeoDescription = "Máy tính, máy tính bảng & Máy tính xách tay", SeoTitle = "Máy tính, máy tính bảng & Máy tính xách tay" },
+                  new CategoryTranslation() { Id = 12, CategoryId = 6, Name = "Computers, Tablet & Laptop", LanguageId = "en", SeoAlias = "Computers-Tablet-Laptop", SeoDescription = "Computers, Tablet & Laptop", SeoTitle = "Computers, Tablet & Laptop" },
+                  new CategoryTranslation() { Id = 13, CategoryId = 7, Name = "Điện thoại", LanguageId = "vi", SeoAlias = "dien-thoai", SeoDescription = "Điện thoại", SeoTitle = "Điện thoại" },
+                  new CategoryTranslation() { Id = 14, CategoryId = 7, Name = "Mobile Phone", LanguageId = "en", SeoAlias = "Mobile-Phone", SeoDescription = "Mobile Phone", SeoTitle = "Mobile Phone" },
+                  new CategoryTranslation() { Id = 15, CategoryId = 8, Name = "Thiết bị âm thanh & Hình ảnh", LanguageId = "vi", SeoAlias = "thiet-bi-am-thanh-hinh-anh", SeoDescription = "Thiết bị âm thanh & Hình ảnh", SeoTitle = "Thiết bị âm thanh & Hình ảnh" },
+                  new CategoryTranslation() { Id = 16, CategoryId = 8, Name = "Sound & Vision", LanguageId = "en", SeoAlias = "sound-vision", SeoDescription = "Sound & Vision", SeoTitle = "Sound & Vision" },
+                  new CategoryTranslation() { Id = 17, CategoryId = 9, Name = "Quần áo", LanguageId = "vi", SeoAlias = "quan-ao", SeoDescription = "Quần áo", SeoTitle = "Quần áo" },
+                  new CategoryTranslation() { Id = 18, CategoryId = 9, Name = "Clothes", LanguageId = "en", SeoAlias = "Clothes", SeoDescription = "Clothes", SeoTitle = "Clothes" },
+                  new CategoryTranslation() { Id = 19, CategoryId = 10, Name = "Quần áo nữ", LanguageId = "vi", SeoAlias = "quan-ao-nu", SeoDescription = "Quần áo nữ", SeoTitle = "Quần áo nữ" },
+                  new CategoryTranslation() { Id = 20, CategoryId = 10, Name = "Women's Clothing", LanguageId = "en", SeoAlias = "women-clothing", SeoDescription = "Women's Clothing", SeoTitle = "Women's Clothing" },
+
+                  new CategoryTranslation() { Id = 21, CategoryId = 11, Name = "Túi xách nữ", LanguageId = "vi", SeoAlias = "tui-xach-nu", SeoDescription = "Túi xách nữ", SeoTitle = "Túi xách nữ" },
+                  new CategoryTranslation() { Id = 22, CategoryId = 11, Name = "Women's Hand Bags", LanguageId = "en", SeoAlias = "women-hand-bags", SeoDescription = "Women's Hand Bags", SeoTitle = "Women's Hand Bags" },
+                  new CategoryTranslation() { Id = 23, CategoryId = 12, Name = "Quần áo nam", LanguageId = "vi", SeoAlias = "quan-ao-nam", SeoDescription = "Quần áo nam", SeoTitle = "Quần áo nam" },
+                  new CategoryTranslation() { Id = 24, CategoryId = 12, Name = "Men's Clothing", LanguageId = "en", SeoAlias = "men-clothing", SeoDescription = "Men's Clothing", SeoTitle = "Men's Clothing" },
+                  new CategoryTranslation() { Id = 25, CategoryId = 13, Name = "Giày nam", LanguageId = "vi", SeoAlias = "giay-nam", SeoDescription = "Giày nam", SeoTitle = "Giày nam" },
+                  new CategoryTranslation() { Id = 26, CategoryId = 13, Name = "Men's Shoes", LanguageId = "en", SeoAlias = "men-clothing", SeoDescription = "Men's Clothing", SeoTitle = "Men's Clothing" },
+                  new CategoryTranslation() { Id = 27, CategoryId = 14, Name = "Quần áo trẻ em", LanguageId = "vi", SeoAlias = "quan-ao-tre-em", SeoDescription = "Quần áo trẻ em", SeoTitle = "Quần áo trẻ em" },
+                  new CategoryTranslation() { Id = 28, CategoryId = 14, Name = "Kids Clothing", LanguageId = "en", SeoAlias = "kids-clothing", SeoDescription = "kids Clothing", SeoTitle = "kids Clothing" },
+                  new CategoryTranslation() { Id = 29, CategoryId = 15, Name = "Giày trẻ em", LanguageId = "vi", SeoAlias = "giay-tre-em", SeoDescription = "Giày trẻ em", SeoTitle = "Giày trẻ em" },
+                  new CategoryTranslation() { Id = 30, CategoryId = 15, Name = "Kids Shoes", LanguageId = "en", SeoAlias = "kids-clothing", SeoDescription = "Kids Clothing", SeoTitle = "Kids Clothing" }
                   );
 
             modelBuilder.Entity<Product>().HasData(
@@ -736,7 +846,11 @@ namespace eShopSolution.Data.Extensions
                 new ProductImage() { Id = 16, ProductId = 16, ImagePath = "/themes/images/products/b3.jpg", Caption = "", DateCreated = DateTime.Now, IsDefault = true },
                 new ProductImage() { Id = 17, ProductId = 17, ImagePath = "/themes/images/products/b4.jpg", Caption = "", DateCreated = DateTime.Now, IsDefault = true },
                 new ProductImage() { Id = 18, ProductId = 18, ImagePath = "/themes/images/products/kindle.png", Caption = "", DateCreated = DateTime.Now, IsDefault = true },
-                new ProductImage() { Id = 19, ProductId = 19, ImagePath = "/themes/images/products/panasonic.jpg", Caption = "", DateCreated = DateTime.Now, IsDefault = true }
+                new ProductImage() { Id = 19, ProductId = 19, ImagePath = "/themes/images/products/panasonic.jpg", Caption = "", DateCreated = DateTime.Now, IsDefault = true },
+                new ProductImage() { Id = 20, ProductId = 4, ImagePath = "/themes/images/products/large/3.jpg", Caption = "", DateCreated = DateTime.Now, IsDefault = false },
+                new ProductImage() { Id = 21, ProductId = 4, ImagePath = "/themes/images/products/large/f1.jpg", Caption = "", DateCreated = DateTime.Now, IsDefault = false },
+                new ProductImage() { Id = 22, ProductId = 4, ImagePath = "/themes/images/products/large/f2.jpg", Caption = "", DateCreated = DateTime.Now, IsDefault = false },
+                new ProductImage() { Id = 23, ProductId = 4, ImagePath = "/themes/images/products/large/f3.jpg", Caption = "", DateCreated = DateTime.Now, IsDefault = false }
                 );
             // any guid
             var roleId = new Guid("342D0C2B-ADF6-4B25-A631-7242CD9472C4");

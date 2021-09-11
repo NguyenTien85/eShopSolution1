@@ -19,14 +19,17 @@ namespace eShopSolution.AdminApp.Controllers
         private readonly IProductApiClient _productApiClient;
         private readonly IConfiguration _configuration;
         private readonly ICategoryApiClient _categoryApiClient;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public ProductController(IProductApiClient productApiClient,
             IConfiguration configuration,
-            ICategoryApiClient categoryApiClient)
+            ICategoryApiClient categoryApiClient,
+            IHttpContextAccessor httpContextAccessor)
         {
             _productApiClient = productApiClient;
             _configuration = configuration;
             _categoryApiClient = categoryApiClient;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IActionResult> Index(string keyword, int? categoryId, int pageIndex = 1, int pageSize = 100)
@@ -47,7 +50,7 @@ namespace eShopSolution.AdminApp.Controllers
             var data = await _productApiClient.GetPaging(request);
             ViewBag.Keyword = keyword;
 
-            var categories = await _categoryApiClient.GetAll();
+            var categories = await _categoryApiClient.GetAll(languageId);
 
             ViewBag.Categories = categories.Select(x => new SelectListItem()
             {
@@ -117,9 +120,9 @@ namespace eShopSolution.AdminApp.Controllers
 
         private async Task<CategoryAssignRequest> GetCategoryAssignRequest(int productId)
         {
-            var productResult = await _productApiClient.GetProductById(productId);
-
-            var categories = await _categoryApiClient.GetAll();
+            var languageId = HttpContext.Session.GetString(SystemConstants.AppSettings.DefaultLanguageId);
+            var productResult = await _productApiClient.GetProductById(productId, languageId);
+            var categories = await _categoryApiClient.GetAll(languageId);
 
             var categoryAssignRequest = new CategoryAssignRequest();
             categoryAssignRequest.Id = productId;
@@ -135,6 +138,77 @@ namespace eShopSolution.AdminApp.Controllers
             }
 
             return categoryAssignRequest;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var languageId = _httpContextAccessor.HttpContext.Session.GetString(SystemConstants.AppSettings.DefaultLanguageId);
+            var product = await _productApiClient.GetProductById(id, languageId);
+            if (product == null)
+            {
+                return View();
+            }
+            var productUpdateRequest = new ProductUpdateRequest()
+            {
+                Description = product.Description,
+                Details = product.Details,
+                Id = product.Id,
+                IsFeatured = product.IsFeatured,
+                LanguageId = product.LanguageId,
+                Name = product.Name,
+                SeoAlias = product.SeoAlias,
+                SeoDescription = product.SeoDescription,
+                SeoTitle = product.SeoTitle,
+                //ThumbnailImage=product.ThubnailImage
+            };
+            return View(productUpdateRequest);
+        }
+
+        [HttpPost]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> Edit([FromForm] ProductUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            var result = await _productApiClient.UpdateProduct(request);
+            if (result)
+            {
+                TempData["result"] = "Update product success";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Fail to update product");
+            return View(request);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            return View(new ProductDeleteRequest()
+            {
+                Id = id
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(ProductDeleteRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            var result = await _productApiClient.Delete(request.Id);
+            if (result.IsSucceeded)
+            {
+                TempData["result"] = "Delete product success";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", result.Message);
+            return View(request);
         }
     }
 }

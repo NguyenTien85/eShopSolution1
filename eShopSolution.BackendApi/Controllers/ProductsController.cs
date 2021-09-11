@@ -26,9 +26,18 @@ namespace eShopSolution.BackendApi.Controllers
         }
 
         [HttpGet("paging")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllPaging([FromQuery] GetManageProductPagingRequest request)
         {
             var products = await _productService.GetAllPaging(request);
+            return Ok(products);
+        }
+
+        [HttpGet("catalog")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAllProductsOfCatalog([FromQuery] GetManageProductPagingRequest request)
+        {
+            var products = await _productService.GetAllProductsOfCatalog(request);
             return Ok(products);
         }
 
@@ -41,6 +50,15 @@ namespace eShopSolution.BackendApi.Controllers
             return Ok(products);
         }
 
+        //api/products/{productid}/{languageId}/catalog
+        [HttpGet("{productId}/{languageId}/catalog")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetCatalogOfProduct(int productId, string languageId)
+        {
+            var catalog = await _productService.GetCatalogOfProduct(productId, languageId);
+            return Ok(catalog);
+        }
+
         //api/products/featured/vi/5
         [HttpGet("latest/{languageId}/{take}")]
         [AllowAnonymous]
@@ -51,6 +69,7 @@ namespace eShopSolution.BackendApi.Controllers
         }
 
         [HttpGet("{productId}/{languageId}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetById(int productId, string languageId)
         {
             var product = await _productService.GetById(productId, languageId);
@@ -83,15 +102,17 @@ namespace eShopSolution.BackendApi.Controllers
             return CreatedAtAction(nameof(GetById), new { id = productId }, product);
         }
 
-        //
-        [HttpPut]
-        public async Task<IActionResult> Update([FromForm] ProductUpdateRequest request)
+        //PUT: //api/products/id
+        [HttpPut("{productId}")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> Update([FromRoute] int productId, [FromForm] ProductUpdateRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
+            request.Id = productId;
             var affectedResult = await _productService.Update(request);
             if (affectedResult == 0)
             {
@@ -106,12 +127,12 @@ namespace eShopSolution.BackendApi.Controllers
         public async Task<IActionResult> Delete(int productId)
         {
             var affectedResult = await _productService.Delete(productId);
-            if (affectedResult == 0)
+            if (!affectedResult.IsSucceeded)
             {
                 return BadRequest();
             }
 
-            return Ok();
+            return Ok(affectedResult);
         }
 
         //
@@ -151,6 +172,24 @@ namespace eShopSolution.BackendApi.Controllers
             }
 
             return Ok(productImage);
+        }
+
+        //Image
+        [HttpGet("{productId}/images")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetListImages(int productId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            var images = await _productService.GetListImages(productId);
+            if (images == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(images);
         }
 
         //Image
