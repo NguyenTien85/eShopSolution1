@@ -164,6 +164,10 @@
     <value>Related Products</value>
     <comment>/Product/Detail</comment>
   </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>SignOut</value>
+    <comment>_Layout</comment>
+  </data>
   <data name="Specials Offer" xml:space="preserve">
     <value>Specials Offer</value>
     <comment>_Layout</comment>

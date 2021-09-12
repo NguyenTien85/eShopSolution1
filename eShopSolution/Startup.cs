@@ -14,6 +14,9 @@ using Microsoft.AspNetCore.Localization;
 using eShopSolution.WebApp.LocalizationResources;
 using eShopSolution.ApiIntegration;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using FluentValidation.AspNetCore;
+using eShopSolution.ViewModels.System.Users.Validation;
 
 namespace eShopSolution
 {
@@ -30,6 +33,13 @@ namespace eShopSolution
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Account/Login/";
+                    options.AccessDeniedPath = "/Account/Forbidden";
+                });
 
             var cultures = new[]
             {
@@ -64,8 +74,11 @@ namespace eShopSolution
                         o.SupportedCultures = cultures;
                         o.SupportedUICultures = cultures;
                         o.DefaultRequestCulture = new RequestCulture("vi");
-                    };
-                });
+                    }
+                    ;
+                })
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>())
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<RegisterRequestValidator>());
 
             services.AddSession(options =>
             {
@@ -73,9 +86,11 @@ namespace eShopSolution
             });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddTransient<ISlideApiClient, SlideApiClient>();
             services.AddTransient<IProductApiClient, ProductApiClient>();
             services.AddTransient<ICategoryApiClient, CategoryApiClient>();
+            services.AddTransient<IUserApiClient, UserApiClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -94,6 +109,7 @@ namespace eShopSolution
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseAuthorization();
