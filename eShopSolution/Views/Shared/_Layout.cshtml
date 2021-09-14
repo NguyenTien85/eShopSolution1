@@ -35,6 +35,7 @@
     <style type="text/css" id="enject"></style>
 </head>
 <body>
+    <input type="hidden" id="curCulture" value="@culture" />
     <div id="header">
         <div class="container">
             <div id="welcomeLine" class="row">
@@ -52,8 +53,8 @@
                                       cookie-handler-url="@(Url.Action("SetCultureCookie", "Home", new { area= "", cltr="{0}", returnUrl="{1}" }))">>
                         </language-nav>
 
-                        <a href="product_summary.html">
-                            <span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span>
+                        <a asp-action="Index" asp-controller="Cart">
+                            <span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ <span class="lbl_num_item_in_cart">0</span>] Itemes in your cart </span>
                         </a>
                     </div>
                 </div>
@@ -164,7 +165,12 @@
 
     <script src="/themes/js/bootshop.js"></script>
     <script src="/themes/js/jquery.lightbox-0.5.js"></script>
-
+    <script src="/js/site.js"></script>
+    <script>
+        var siteControler = new SiteControler();
+        siteControler.Initialize();
+    </script>
+    @RenderSection("scripts", required: false);
     <!-- Themes switcher section ============================================================================================= -->
     <div id="secectionBox">
         <link rel="stylesheet" href="/themes/switch/themeswitch.css" type="text/css" media="screen" />

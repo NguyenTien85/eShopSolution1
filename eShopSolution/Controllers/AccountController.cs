@@ -57,13 +57,60 @@ namespace eShopSolution.WebApp.Controllers
                 userPrincipal,
                 authProperties
                 );
-            return RedirectToAction("Index", "Home");
+            return Redirect(request.returnUrl);
         }
 
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            request.UserName = request.Email;//use the Username of user As email registered
+            var result = await _userApiClient.RegisterUser(request);
+            if (!result.IsSucceeded)
+            {
+                ModelState.AddModelError("", result.Message);
+                return View(request);
+            }
+
+            var userLogin = new LoginRequest()
+            {
+                Password = request.Password,
+                UserName = request.UserName,
+                RememberMe = true
+            };
+            var loginResult = await _userApiClient.Authenticate(userLogin);
+            var token = loginResult.ResultObj;
+
+            var userPrincipal = this.ValidateToken(token);
+            var authProperties = new AuthenticationProperties
+            {
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                IsPersistent = true
+            };
+            HttpContext.Session.SetString(SystemConstants.AppSettings.DefaultLanguageId, _configuration[SystemConstants.AppSettings.DefaultLanguageId]);
+            HttpContext.Session.SetString(SystemConstants.AppSettings.Token, token);
+
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                userPrincipal,
+                authProperties
+                );
             return RedirectToAction("Index", "Home");
         }
 

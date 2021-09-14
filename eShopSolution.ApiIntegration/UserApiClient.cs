@@ -96,7 +96,8 @@ namespace eShopSolution.ApiIntegration
             {
                 return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
             }
-            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
+            //return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
+            return new ApiErrorResult<bool>("register fail, pls try again");
         }
 
         public async Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request)

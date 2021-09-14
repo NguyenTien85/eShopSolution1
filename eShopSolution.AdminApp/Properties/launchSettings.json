@@ -15,6 +15,14 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+    //"eShopSolution.AdminApp": {
+    //  "commandName": "Project",
+    //  "dotnetRunMessages": "true",
+    //  "launchBrowser": true,
+    //  "applicationUrl": "http://localhost:8002",
+    //  "environmentVariables": {
+    //    "ASPNETCORE_ENVIRONMENT": "Production"
+    //  }
     "eShopSolution.AdminApp": {
       "commandName": "Project",
       "dotnetRunMessages": "true",

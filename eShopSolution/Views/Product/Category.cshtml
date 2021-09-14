@@ -60,7 +60,7 @@
                             <input type="checkbox">  Adds product to compair
                         </label><br />
 
-                        <a href="product_details.html" class="btn btn-large btn-primary"> <localize>Add to</localize> <i class=" icon-shopping-cart"></i></a>
+                        <a class="btn btn-large btn-primary btn-add-cart" data-id="@product.Id"> <localize>Add to</localize> <i class=" icon-shopping-cart"></i></a>
                         <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
                     </form>
                 </div>
@@ -77,7 +77,7 @@
                 var url = $"/{culture}/{_loc["productUrl"]}/{product.Id}";
                 <li class="span3">
                     <div class="thumbnail">
-                        <a href="@url"><img src="@product.ThubnailImage" alt="" /></a>
+                        <a href="@url"><img src="@product.ThubnailImage" style="height:100px" alt="" /></a>
                         <div class="caption">
                             <h5>@product.Name</h5>
                             <p>
@@ -85,7 +85,7 @@
                             </p>
                             <h4 style="text-align:center">
                                 <a class="btn" href="@url"> <i class="icon-zoom-in"></i></a>
-                                <a class="btn" href="#"><localize>Add to</localize><i class="icon-shopping-cart"></i></a>
+                                <a class="btn btn-add-cart" data-id="@product.Id" ><localize>Add to</localize><i class="icon-shopping-cart"></i></a>
                                 <a class="btn btn-primary" href="#">@product.Price</a>
                             </h4>
                         </div>
