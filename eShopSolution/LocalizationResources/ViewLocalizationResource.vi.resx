@@ -164,6 +164,10 @@
     <value>Sản phẩm tương tự</value>
     <comment>/Product/Detail</comment>
   </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Đăng xuất</value>
+    <comment>_Layout</comment>
+  </data>
   <data name="Specials Offer" xml:space="preserve">
     <value>Khuyến mãi</value>
     <comment>_Layout</comment>

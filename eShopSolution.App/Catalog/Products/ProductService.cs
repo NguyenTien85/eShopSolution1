@@ -304,6 +304,9 @@ namespace eShopSolution.App.Catalog.Products
                                     select ct.Name
                                     ).ToListAsync();
 
+            var thumbnailImage = await _context.ProductImages
+                .FirstOrDefaultAsync(x => x.ProductId == productId && x.IsDefault);
+
             var productViewModel = new ProductViewModel()
             {
                 Id = product.Id,
@@ -320,7 +323,8 @@ namespace eShopSolution.App.Catalog.Products
                 Stock = product.Stock,
                 ViewCount = product.ViewCount,
                 Categories = categories,
-                IsFeatured = product.IsFeatured
+                IsFeatured = product.IsFeatured,
+                ThubnailImage = thumbnailImage.ImagePath.ToString()
             };
             return productViewModel;
         }

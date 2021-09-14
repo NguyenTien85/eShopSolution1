@@ -55,13 +55,13 @@ namespace eShopSolution.AdminApp
             services.AddTransient<ICategoryApiClient, CategoryApiClient>();
 
             IMvcBuilder builder = services.AddRazorPages();
-#if DEBUG
-            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-            if (env == Environments.Development)
-            {
-                builder.AddRazorRuntimeCompilation();
-            }
-#endif
+            //#if DEBUG
+            //            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            //            if (env == Environments.Development)
+            //            {
+            //                builder.AddRazorRuntimeCompilation();
+            //            }
+            //#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,9 +75,9 @@ namespace eShopSolution.AdminApp
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                //app.UseHsts();
             }
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseAuthentication();

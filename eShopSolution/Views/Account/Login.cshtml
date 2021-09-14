@@ -1,0 +1,62 @@
+﻿@using eShopSolution.ViewModels.System.Users.Request
+@{
+
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var culture = CultureInfo.CurrentCulture.Name;
+}
+
+@model LoginRequest
+<ul class="breadcrumb">
+    <li><a href="/">Home</a> <span class="divider">/</span></li>
+    <li class="active">Login</li>
+</ul>
+<h3> Login</h3>
+<hr class="soft" />
+
+<div class="row">
+    <div class="span4">
+        <div class="well">
+            <h5>CREATE YOUR ACCOUNT</h5><br />
+            <form asp-action="Register" asp-controller="Account" method="get">
+                <div class="controls">
+                    <button type="submit" class="btn block">Create Your Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="span1"> &nbsp;</div>
+    <div class="span4">
+        <div class="well">
+            <h5>ALREADY REGISTERED ?</h5>
+            @*<form action="/@culture/Account/Login" method="post">*@
+            <form asp-action="Login" asp-controller="Account" method="post">
+                <div asp-validation-summary="All" class="text-danger alert alert-block alert-error fade in"></div>
+                <div class="control-group">
+                    <label class="control-label">UserName</label>
+                    <div class="controls">
+                        <input class="span3" type="text" asp-for="UserName" placeholder="Email">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Password</label>
+                    <div class="controls">
+                        <input type="password" class="span3" asp-for="Password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="control-group">                    
+                    <div class="controls">
+                        <input class="span1 form-check-input" asp-for="RememberMe" type="checkbox" value="false" />
+                        <label class="span2 form-check-label" asp-for="RememberMe">Remember Me</label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn">Sign in</button> <a href="forgetpass.html">Forget password?</a>
+                    </div>
+                </div>
+                <input type="hidden" asp-for="returnUrl" value="@Context.Request.Path" />
+            </form>
+        </div>
+    </div>
+</div>

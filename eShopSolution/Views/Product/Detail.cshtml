@@ -31,15 +31,8 @@
                     {
                         <a href="@Model.ProductImages[i].ImagePath"> <img style="width:29%" src="@Model.ProductImages[i].ImagePath" alt="" /></a>
                     }
-                    @*<a href="themes/images/products/large/f3.jpg"> <img style="width:29%" src="themes/images/products/large/f3.jpg" alt="" /></a>
-                        <a href="themes/images/products/large/f1.jpg"> <img style="width:29%" src="themes/images/products/large/f1.jpg" alt="" /></a>
-                        <a href="themes/images/products/large/f2.jpg"> <img style="width:29%" src="themes/images/products/large/f2.jpg" alt="" /></a>*@
                 </div>
             </div>
-            <!--
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
-            -->
         </div>
 
         <div class="btn-toolbar">
@@ -55,7 +48,7 @@
     </div>
     <div class="span6">
         <h3>@Model.Product.Name </h3>
-        <small>- (14MP, 18x Optical Zoom) 3-inch LCD</small>
+        <small>@Model.Product.Description</small>
         <hr class="soft" />
         <form class="form-horizontal qtyFrm">
             <div class="control-group">
@@ -132,7 +125,7 @@
                                         <input type="checkbox">  Adds product to compair
                                     </label><br />
                                     <div class="btn-group">
-                                        <a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
+                                        <a class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
                                         <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
                                     </div>
                                 </form>

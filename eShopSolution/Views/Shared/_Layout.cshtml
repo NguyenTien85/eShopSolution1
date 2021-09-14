@@ -35,21 +35,26 @@
     <style type="text/css" id="enject"></style>
 </head>
 <body>
+    <input type="hidden" id="curCulture" value="@culture" />
     <div id="header">
         <div class="container">
             <div id="welcomeLine" class="row">
-                <div class="span6">Welcome!<strong> User</strong></div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="span6">Welcome!<strong> @User.Identity.Name</strong></div>
+                }
+                else
+                {
+                    <div class="span6"></div>
+                }
                 <div class="span6">
                     <div class="pull-right">
-
-                        @*<a href="/en/Home/SetCultureCookie?cltr=en&returnUrl=/en"><span class=""><localize>English</localize></span></a>
-                            <a href="/vi/Home/SetCultureCookie?cltr=vi&returnUrl=/vi"><span class=""><localize>Vietnamese</localize></span></a>*@
                         <language-nav language-label="NativeName"
                                       cookie-handler-url="@(Url.Action("SetCultureCookie", "Home", new { area= "", cltr="{0}", returnUrl="{1}" }))">>
                         </language-nav>
 
-                        <a href="product_summary.html">
-                            <span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span>
+                        <a asp-action="Index" asp-controller="Cart">
+                            <span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ <span class="lbl_num_item_in_cart">0</span>] Itemes in your cart </span>
                         </a>
                     </div>
                 </div>
@@ -80,32 +85,20 @@
                         <li class=""><a asp-route-culture="@culture" localize-content>Delivery</a></li>
                         <li class=""><a asp-route-culture="@culture" localize-content>Contact</a></li>
                         <li class="">
-                            <a href="#login" role="button" data-toggle="modal" style="padding-right:0">
-                                <span class="btn btn-large btn-success"><localize>Login</localize></span>
-                            </a>
-                            <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3>Login Block</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal loginFrm">
-                                        <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Email">
-                                        </div>
-                                        <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Password">
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="checkbox">
-                                                <input type="checkbox"> Remember me
-                                            </label>
-                                        </div>
-                                    </form>
-                                    <button type="submit" class="btn btn-success">Sign in</button>
-                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                </div>
-                            </div>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <form action="/@culture/Account/Logout" method="post">
+                                    <button type="submit" style="padding-right:0;margin-top:10px;margin-bottom:0px;background:transparent;border:none">
+                                        <span class="btn btn-large btn-success"><localize>SignOut</localize></span>
+                                    </button>
+                                </form>
+                            }
+                            else
+                            {
+                                <a href="/@culture/Account/Login" role="button" style="padding-right:0">
+                                    <span class="btn btn-large btn-success"><localize>Login</localize></span>
+                                </a>
+                            }
                         </li>
                     </ul>
                 </div>
@@ -172,7 +165,12 @@
 
     <script src="/themes/js/bootshop.js"></script>
     <script src="/themes/js/jquery.lightbox-0.5.js"></script>
-
+    <script src="/js/site.js"></script>
+    <script>
+        var siteControler = new SiteControler();
+        siteControler.Initialize();
+    </script>
+    @RenderSection("scripts", required: false);
     <!-- Themes switcher section ============================================================================================= -->
     <div id="secectionBox">
         <link rel="stylesheet" href="/themes/switch/themeswitch.css" type="text/css" media="screen" />

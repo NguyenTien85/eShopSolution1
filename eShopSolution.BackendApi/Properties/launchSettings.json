@@ -15,6 +15,15 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+    //"eShopSolution.BackendApi": {
+    //  "commandName": "Project",
+    //  "dotnetRunMessages": "true",
+    //  "launchBrowser": false,
+    //  "launchUrl": "swagger",
+    //  "applicationUrl": "https://localhost:8001",
+    //  "environmentVariables": {
+    //    "ASPNETCORE_ENVIRONMENT": "Production"
+    //  }
     "eShopSolution.BackendApi": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
